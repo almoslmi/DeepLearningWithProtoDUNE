@@ -3,9 +3,8 @@ import glob
 import os
 import argparse
 import configparser
-from os import path
-from get_data import get_data_generator
-from plotting_tools import plot_feature_label, plot_categories
+from tools.data_tools import get_data_generator
+from tools.plotting_tools import plot_feature_label, plot_categories
 
 def argument_parser():
     ap = argparse.ArgumentParser()
@@ -24,7 +23,8 @@ def main():
         sys.exit(1)
 
     config = configparser.ConfigParser()
-    config.read('configuration.ini')
+    config_path = path.join("configurations", "master_configuration.ini")
+    config.read(config_path)
     print("\nReading info from configuration:")
 
     IMAGE_WIDTH = int(config["DEFAULT"]["IMAGE_WIDTH"])
@@ -49,13 +49,14 @@ def main():
     print("FEATURE_FILE_VALIDATION: {}".format(FEATURE_FILE_VALIDATION))
     print("LABEL_FILE_VALIDATION: {}".format(LABEL_FILE_VALIDATION))
     print("FEATURE_FILE_TESTING: {}".format(FEATURE_FILE_TESTING))
-    print("LABEL_FILE_TESTING: {}".format(LABEL_FILE_TESTING))
+    print("LABEL_FILE_TESTING: {}\n".format(LABEL_FILE_TESTING))
+    print()
 
     feature_generator_training = get_data_generator(FEATURE_FILE_TRAINING, LABEL_FILE_TRAINING)
     feature_generator_validation = get_data_generator(FEATURE_FILE_VALIDATION, LABEL_FILE_VALIDATION)
     feature_generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
 
-    plot_path = path.join("plots",  "events", "*.pdf")
+    plot_path = os.path.join("plots",  "events", "*.pdf")
     files = glob.glob(plot_path)
     for f in files:
         os.remove(f)
@@ -68,10 +69,10 @@ def main():
 
         feature_image = X.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
         label_image = y.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
-        plot_feature_label_path = path.join("plots",  "events", "feature_label_training_event_{}.pdf".format(count))
+        plot_feature_label_path = os.path.join("plots",  "events", "feature_label_training_event_{}.pdf".format(count))
         plot_feature_label(feature_image, label_image,  'Feature', 'Label', CLASS_NAMES, plot_feature_label_path)
 
-        plot_categories_path = path.join("plots", "events", "categories_training_event_{}.pdf".format(count))
+        plot_categories_path = os.path.join("plots", "events", "categories_training_event_{}.pdf".format(count))
         plot_categories(feature_image, label_image, CLASS_NAMES, plot_categories_path)
 
     count = 0
