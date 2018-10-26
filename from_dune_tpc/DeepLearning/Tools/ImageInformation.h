@@ -63,5 +63,7 @@ namespace ProtoDuneDL
     {
 	return int((double(newMax - newMin) * double(x - xMin) / double(xMax - xMin)) + double(newMin));
     }
+
+
 }//namespace ProtoDuneDL
 #endif

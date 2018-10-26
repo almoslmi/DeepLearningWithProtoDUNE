@@ -45,17 +45,18 @@ void RootToCSV::MakeCSV()
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     unsigned int nEntries = TreeInput->GetEntries();
+    cout<<endl;
     if(nEntries <= 0)
         {
-            cout << "Error! There are no entries in the Tree." << nEntries << endl;
+            cout << "Error! There are no entries in the Tree." << nEntries << endl<<endl;
         }
     else
         {
-            cout << "Total Entries in the Tree is: " << nEntries << endl;
+            cout << "Total Entries in the Tree is: " << nEntries << endl<<endl;
         }
 
     ofstream FileOutput[6]; // 3 planes x (Feature + Label)
-    TString FileName[6] = {"U_Feature.csv", "V_Feature.csv", "W_Feature.csv", "U_Label.csv", "V_Label.csv", "W_Label.csv"};
+    TString FileName[6] = {"feature_u.csv", "feature_v.csv", "feature_w.csv", "label_u.csv", "label_v.csv", "label_w.csv"};
 
     for (unsigned int iFile = 0; iFile < 6; iFile++)
         {
@@ -80,7 +81,8 @@ void RootToCSV::MakeCSV()
 
             unsigned int nHits = pHitsStruct->size();
             //TO DO: Min hit cut can be made here
-            cout << "Total hits for entry " << iEntry + 1 << " is: " << nHits << endl;
+            //cout << "Total hits for entry " << iEntry + 1 << " is: " << nHits << endl;
+	    cout << "Event: " << iEntry + 1 << endl;
 
             static double FeatureMap[ProtoDuneDL::MaxPlanes][ProtoDuneDL::MaxTDCs][ProtoDuneDL::MaxWires];
             static int LabelMap[ProtoDuneDL::MaxPlanes][ProtoDuneDL::MaxTDCs][ProtoDuneDL::MaxWires];
@@ -106,12 +108,16 @@ void RootToCSV::MakeCSV()
                     //TO DO: Flip wire for V plane?
                     unsigned int wire = hHitsStruct.global_wire_index;
 
-                    // TO DO: Better transformation
+                    // TO DO: Better downsampling
                     unsigned int tdcNew = ProtoDuneDL::TransformRange(tdc, 0, ProtoDuneDL::TDCsPerPlane[plane], 0, ProtoDuneDL::MaxTDCs);
                     unsigned int wireNew = ProtoDuneDL::TransformRange(wire, 0, ProtoDuneDL::GlobalWiresPerPlane[plane], 0, ProtoDuneDL::MaxWires);
 
-                    FeatureMap[plane][tdcNew][wireNew] = hHitsStruct.adc;
-                    LabelMap[plane][tdcNew][wireNew] = hHitsStruct.origin;
+                    double adc = hHitsStruct.adc;
+                    if(adc > FeatureMap[plane][tdcNew][wireNew])
+                        {
+                            FeatureMap[plane][tdcNew][wireNew] = adc;
+                            LabelMap[plane][tdcNew][wireNew] = hHitsStruct.origin;
+                        }
                 }
 
             for (unsigned int iPlane = 0; iPlane < ProtoDuneDL::MaxPlanes; iPlane++)

@@ -15,7 +15,7 @@ source:
 {
   module_type: RootInput
   maxEvents: -1
-  fileNames: [ "/pnfs/dune/tape_backed/dunepro/mcc10/mc/full-reconstructed/02/05/23/16/mcc10_protodune_beam_p4GeV_cosmics_3ms_6_20171229T011309_merged0.root"]
+  fileNames: [ "reco.root"]
 }
 
 physics:
