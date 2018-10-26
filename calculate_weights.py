@@ -19,14 +19,15 @@ def get_class_weights(y):
 def main():
     config = configparser.ConfigParser()
     config.read('configuration.ini')
-    print("\nReading info from configuration")
+    print("\nReading info from configuration:")
+
     FEATURE_FILE_TRAINING = config["DEFAULT"]["FEATURE_FILE_TRAINING"]
     LABEL_FILE_TRAINING = config["DEFAULT"]["LABEL_FILE_TRAINING"]
-    CLASSE_NAMES = config["DEFAULT"]["CLASSE_NAMES"].split()
+    CLASS_NAMES = config["DEFAULT"]["CLASS_NAMES"].split()
 
     print("FEATURE_FILE_TRAINING: {}".format(FEATURE_FILE_TRAINING))
     print("LABEL_FILE_TRAINING: {}\n".format(LABEL_FILE_TRAINING))
-    print("CLASSE_NAMES: {}\n".format(CLASSE_NAMES))
+    print("CLASS_NAMES: {}\n".format(CLASS_NAMES))
 
     iter_data = get_data_generator(FEATURE_FILE_TRAINING, LABEL_FILE_TRAINING)
     weights = [[],[],[]]
@@ -37,7 +38,7 @@ def main():
 
     ranges = [(0,2), (0,50), (0, 3500)]
     plot_path = path.join("plots", "weights_median.pdf")
-    plot_weights_median(weights, ranges, CLASSE_NAMES, plot_path)
+    plot_weights_median(weights, ranges, CLASS_NAMES, plot_path)
     print("\nDone! Plot with median weights for each class is saved at {}!\n".format(plot_path))
 
 if __name__ == "__main__":

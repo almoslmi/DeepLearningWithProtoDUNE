@@ -43,6 +43,11 @@ python calculate_weights.py
 ```
 It will run over the default traning files in the configuration. Median for each class will be displayed in plots/weights_median.pdf.
 
+### To make plots of events
+```
+# For 10 events
+python plot_events.py --events 10 
+```
 
 ### To open jupyter notebook
 #### Create an IPython kernel for the environment

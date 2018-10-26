@@ -14,6 +14,7 @@ def argument_parser():
 def main():
     config = configparser.ConfigParser()
     config.read('configuration.ini')
+    print("\nReading info from configuration:")
 
     args = argument_parser()
     if args["operation"] == "Training":
@@ -49,9 +50,7 @@ def main():
     IMAGE_WIDTH = int(config["DEFAULT"]["IMAGE_WIDTH"])
     IMAGE_HEIGHT = int(config["DEFAULT"]["IMAGE_HEIGHT"])
     IMAGE_DEPTH = int(config["DEFAULT"]["IMAGE_DEPTH"])
-    NUM_CLASSES = int(config["DEFAULT"]["NUM_CLASSES"])
-    CLASSE_NAMES = config["DEFAULT"]["CLASSE_NAMES"].split()
-    CLASSE_VALUES = list(map(int, config["DEFAULT"]["CLASSE_VALUES"].split()))
+    CLASS_NAMES = config["DEFAULT"]["CLASS_NAMES"].split()
     FEATURE_FILE_TRAINING = config["DEFAULT"]["FEATURE_FILE_TRAINING"]
     LABEL_FILE_TRAINING = config["DEFAULT"]["LABEL_FILE_TRAINING"]
     FEATURE_FILE_VALIDATION = config["DEFAULT"]["FEATURE_FILE_VALIDATION"]
@@ -68,9 +67,7 @@ def main():
     print("IMAGE_WIDTH: {}".format(IMAGE_WIDTH))
     print("IMAGE_HEIGHT: {}".format(IMAGE_HEIGHT))
     print("IMAGE_DEPTH: {}".format(IMAGE_DEPTH))
-    print("NUM_CLASSES: {}".format(NUM_CLASSES))
-    print("CLASSES_NAME: {}".format(CLASSES_NAME))
-    print("CLASSES_VALUE: {}".format(CLASSES_VALUE))
+    print("CLASS_NAMES: {}".format(CLASS_NAMES))
     print("FEATURE_FILE_TRAINING: {}".format(FEATURE_FILE_TRAINING))
     print("LABEL_FILE_TRAINING: {}".format(LABEL_FILE_TRAINING))
     print("FEATURE_FILE_VALIDATION: {}".format(FEATURE_FILE_VALIDATION))
