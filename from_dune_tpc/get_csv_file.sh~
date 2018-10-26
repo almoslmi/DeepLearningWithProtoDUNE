@@ -1,7 +1,0 @@
-cd ../input_files
-rm -rf training/*.csv
-scp arbint@dunegpvm03.fnal.gov:/nashome/a/arbint/DuneData/RootFiles/DL-Work/RootToCSV/Training/W*.csv training/
-rm -rf testing/*.csv
-scp arbint@dunegpvm03.fnal.gov:/nashome/a/arbint/DuneData/RootFiles/DL-Work/RootToCSV/Testing/W*.csv testing/
-rm -rf validation/*.csv
-scp arbint@dunegpvm03.fnal.gov:/nashome/a/arbint/DuneData/RootFiles/DL-Work/RootToCSV/Validation/W*.csv validation/

@@ -177,8 +177,17 @@ namespace ProtoDuneDL
     /////////////////////////////////////////////////////////
     void DataProcessing::analyze( const art::Event & event )
     {
-	// We must have MC for this module to make sense
-	//if(event.isRealData())
+	// Real data will not have primary particle (label) information
+	bool isMC = true;
+	if(event.isRealData())
+	    {
+		logFile << "Running over real data!!" << endl << endl;
+		isMC = false;
+	    }
+	else
+	    {
+		logFile << "Running over simulation!!" << endl << endl;
+	    }
 
 	// Clear the vectors for each event
 	pHitsStruct->clear();
@@ -197,87 +206,90 @@ namespace ProtoDuneDL
 	// Get event MC truth information
 	// Map of trackID and energy of primary to match to hits
 	map<int, unsigned int> mapPrimaryToHits; // trackID and origin
-	std::vector< art::Handle< std::vector<simb::MCTruth> > > allMCTruthList;
-	event.getManyByType(allMCTruthList);
-	for(unsigned int mcl = 0; mcl < allMCTruthList.size(); ++mcl)
+	if(isMC)
 	    {
-		art::Handle< std::vector<simb::MCTruth> > allMCTruthListHandle = allMCTruthList[mcl];
-		for(unsigned int mch = 0; mch < allMCTruthListHandle->size(); ++mch)
+		std::vector< art::Handle< std::vector<simb::MCTruth> > > allMCTruthList;
+		event.getManyByType(allMCTruthList);
+		for(unsigned int mcl = 0; mcl < allMCTruthList.size(); ++mcl)
 		    {
-			art::Ptr<simb::MCTruth> mcTruth(allMCTruthListHandle, mch);
-			auto truthOrigin = mcTruth->Origin();
-			unsigned int primaryOrigin = ProtoDuneDL::Labels::Undefined;
-			if (truthOrigin == simb::kCosmicRay)
+			art::Handle< std::vector<simb::MCTruth> > allMCTruthListHandle = allMCTruthList[mcl];
+			for(unsigned int mch = 0; mch < allMCTruthListHandle->size(); ++mch)
 			    {
-				primaryOrigin = ProtoDuneDL::Labels::Cosmic;
-			    }
-			else if (truthOrigin == simb::kSingleParticle)
-			    {
-				primaryOrigin = ProtoDuneDL::Labels::Beam;
-			    }
-
-			unsigned int nTruthParticles = mcTruth->NParticles();
-			logFile << "MC truth origin: " << truthOrigin << endl;
-			logFile << "No. of truth particles: " << nTruthParticles << endl << endl;
-
-			for(unsigned int iParticle = 0; iParticle < nTruthParticles; iParticle++)
-			    {
-				const simb::MCParticle& particle(mcTruth->GetParticle(iParticle));
-				int pdg = particle.PdgCode();
-				double energy = particle.E();
-				int genTrackId = particle.TrackId();
-
-				// Match this primary muon to a GEANT track and assign GEANT track id
-				int geantTrackId = -9999;
-				const sim::ParticleList& geantList = particleInventory->ParticleList();
-				for (const auto& PartPair : geantList)
+				art::Ptr<simb::MCTruth> mcTruth(allMCTruthListHandle, mch);
+				auto truthOrigin = mcTruth->Origin();
+				unsigned int primaryOrigin = ProtoDuneDL::Labels::Undefined;
+				if (truthOrigin == simb::kCosmicRay)
 				    {
-					const simb::MCParticle& geantParticle = *(PartPair.second);
-					if((pdg == geantParticle.PdgCode()) &&
-					   (fabs(particle.Px() - geantParticle.Px()) < 0.0001) &&
-					   (fabs(particle.Py() - geantParticle.Py()) < 0.0001) &&
-					   (fabs(particle.Pz() - geantParticle.Pz()) < 0.0001))
+					primaryOrigin = ProtoDuneDL::Labels::Cosmic;
+				    }
+				else if (truthOrigin == simb::kSingleParticle)
+				    {
+					primaryOrigin = ProtoDuneDL::Labels::Beam;
+				    }
+
+				unsigned int nTruthParticles = mcTruth->NParticles();
+				logFile << "MC truth origin: " << truthOrigin << endl;
+				logFile << "No. of truth particles: " << nTruthParticles << endl << endl;
+
+				for(unsigned int iParticle = 0; iParticle < nTruthParticles; iParticle++)
+				    {
+					const simb::MCParticle& particle(mcTruth->GetParticle(iParticle));
+					int pdg = particle.PdgCode();
+					double energy = particle.E();
+					int genTrackId = particle.TrackId();
+
+					// Match this primary muon to a GEANT track and assign GEANT track id
+					int geantTrackId = -9999;
+					const sim::ParticleList& geantList = particleInventory->ParticleList();
+					for (const auto& PartPair : geantList)
 					    {
-						geantTrackId = geantParticle.TrackId();
-						break;
+						const simb::MCParticle& geantParticle = *(PartPair.second);
+						if((pdg == geantParticle.PdgCode()) &&
+						   (fabs(particle.Px() - geantParticle.Px()) < 0.0001) &&
+						   (fabs(particle.Py() - geantParticle.Py()) < 0.0001) &&
+						   (fabs(particle.Pz() - geantParticle.Pz()) < 0.0001))
+						    {
+							geantTrackId = geantParticle.TrackId();
+							break;
+						    }
 					    }
-				    }
 
-				if(fDebug || (iParticle <= 5 && nEvents == 1))
-				    {
-					logFile << "Particle: " << iParticle << endl;
-					logFile << "PDG: " << pdg << endl;
-					logFile << "Energy: " << energy << endl << endl;
-					logFile << "Generator TrackId: " << genTrackId << endl << endl;
-					logFile << "GEANT TrackId: " << geantTrackId << endl << endl;
-				    }
+					if(fDebug || (iParticle <= 5 && nEvents == 1))
+					    {
+						logFile << "Particle: " << iParticle << endl;
+						logFile << "PDG: " << pdg << endl;
+						logFile << "Energy: " << energy << endl << endl;
+						logFile << "Generator TrackId: " << genTrackId << endl << endl;
+						logFile << "GEANT TrackId: " << geantTrackId << endl << endl;
+					    }
 
-				if(fDebug)
-				    {
-					ProtoDuneDL::PrimaryParticleStruct tempParticle;
-					tempParticle.event_no = nEvents;
-					tempParticle.event_id = eventId;
-					tempParticle.origin = primaryOrigin;
-					tempParticle.n_particles = nTruthParticles;
-					tempParticle.pdg = pdg;
-					tempParticle.energy = energy;
-					tempParticle.gen_track_id = genTrackId;
-					tempParticle.geant_track_id = geantTrackId;
-					pPrimaryParticleStruct->push_back(tempParticle);
-				    }
+					if(fDebug)
+					    {
+						ProtoDuneDL::PrimaryParticleStruct tempParticle;
+						tempParticle.event_no = nEvents;
+						tempParticle.event_id = eventId;
+						tempParticle.origin = primaryOrigin;
+						tempParticle.n_particles = nTruthParticles;
+						tempParticle.pdg = pdg;
+						tempParticle.energy = energy;
+						tempParticle.gen_track_id = genTrackId;
+						tempParticle.geant_track_id = geantTrackId;
+						pPrimaryParticleStruct->push_back(tempParticle);
+					    }
 
-				//Skip the particle if it can't be assigned to a GEANT track
-				if(geantTrackId == -9999)
-				    {
-					continue;
+					//Skip the particle if it can't be assigned to a GEANT track
+					if(geantTrackId == -9999)
+					    {
+						continue;
+					    }
+					mapPrimaryToHits.insert(make_pair(geantTrackId, primaryOrigin));
 				    }
-				mapPrimaryToHits.insert(make_pair(geantTrackId, primaryOrigin));
 			    }
 		    }
-	    }
-	if(fDebug)
-	    {
-		tPrimaryParticleTree->Fill();
+		if(fDebug)
+		    {
+			tPrimaryParticleTree->Fill();
+		    }
 	    }
 
 	// Get hit information
@@ -314,49 +326,56 @@ namespace ProtoDuneDL
 		unsigned int channelNo = geom->PlaneWireToChannel(planeIndex, wireIndex, tpcIndex, cryostatIndex);
 
 		// Get truth information about the hit
-		// Multiple truth can contribute to a hit; we assign hit to trackID with max energy
-		unordered_map<int, double> mapIdEnergy;
-		for (auto const & ide : backTracker->HitToTrackIDEs(hitList[iHit]))
-		    {
-			mapIdEnergy[ide.trackID] += ide.energy; // Sum energy from the hit with Geant4 supplied trackID [MeV]
-		    }
-
 		int bestTrackId = -9999;
 		double totalHitEnergy = 0.0, bestTrackIdEnergy = 0.0;
-		for (auto const & contrib : mapIdEnergy)
-		    {
-			totalHitEnergy += contrib.second; // Sum total energy in these hits
-			if (contrib.second > bestTrackIdEnergy) // Find track ID corresponding to max energy
-			    {
-				bestTrackIdEnergy = contrib.second;
-				bestTrackId = contrib.first;
-			    }
-		    }
-
-		if(totalHitEnergy <= 0.0 || bestTrackId == -9999)
-		    {
-			continue;
-		    }
-
-		// Negative ID means this is EM activity caused by track with the same but positive ID
-		if(bestTrackId < 0)
-		    {
-			bestTrackId = -bestTrackId;
-		    }
-
-		auto origin = particleInventory->TrackIdToMCTruth_P(bestTrackId)->Origin();
 		unsigned int hitOrigin = ProtoDuneDL::Labels::Undefined;
-		if (origin == simb::kCosmicRay)
+		unsigned int pdg = 9999;
+		double truthEnergy = 0.0;
+
+		if(isMC)
 		    {
-			hitOrigin = ProtoDuneDL::Labels::Cosmic;
-		    }
-		else if (origin == simb::kSingleParticle)
-		    {
-			hitOrigin = ProtoDuneDL::Labels::Beam;
+			// Multiple truth can contribute to a hit; we assign hit to trackID with max energy
+			unordered_map<int, double> mapIdEnergy;
+			for (auto const & ide : backTracker->HitToTrackIDEs(hitList[iHit]))
+			    {
+				mapIdEnergy[ide.trackID] += ide.energy; // Sum energy from the hit with Geant4 supplied trackID [MeV]
+			    }
+
+			for (auto const & contrib : mapIdEnergy)
+			    {
+				totalHitEnergy += contrib.second; // Sum total energy in these hits
+				if (contrib.second > bestTrackIdEnergy) // Find track ID corresponding to max energy
+				    {
+					bestTrackIdEnergy = contrib.second;
+					bestTrackId = contrib.first;
+				    }
+			    }
+
+			if(totalHitEnergy <= 0.0 || bestTrackId == -9999)
+			    {
+				continue;
+			    }
+
+                    // Negative ID means this is EM activity caused by track with the same but positive ID
+                    if(bestTrackId < 0)
+                        {
+                            bestTrackId = -bestTrackId;
+                        }
+
+                    auto origin = particleInventory->TrackIdToMCTruth_P(bestTrackId)->Origin();
+                    if (origin == simb::kCosmicRay)
+                        {
+                            hitOrigin = ProtoDuneDL::Labels::Cosmic;
+                        }
+                    else if (origin == simb::kSingleParticle)
+                        {
+                            hitOrigin = ProtoDuneDL::Labels::Beam;
+                        }
+
+                    pdg = particleInventory->TrackIdToParticle_P(bestTrackId)->PdgCode();
+                    truthEnergy = particleInventory->TrackIdToParticle_P(bestTrackId)->E() * 1E-3;
                 }
 
-            unsigned int pdg = particleInventory->TrackIdToParticle_P(bestTrackId)->PdgCode();
-            double truthEnergy = particleInventory->TrackIdToParticle_P(bestTrackId)->E() * 1E-3;
             if(fDebug || (iHit <= 5 && nEvents == 1))
                 {
                     logFile << "Hit: " << iHit << endl;
@@ -394,7 +413,12 @@ namespace ProtoDuneDL
                 }
 
             // Keep the hit only if it can be matched to the primary
-            if((mapPrimaryToHits.find(bestTrackId) != mapPrimaryToHits.end()) && (mapPrimaryToHits[bestTrackId] == hitOrigin))
+            bool keepHit = true;
+            if(isMC)
+                {
+                    keepHit = (mapPrimaryToHits.find(bestTrackId) != mapPrimaryToHits.end()) && (mapPrimaryToHits[bestTrackId] == hitOrigin);
+                }
+            if(keepHit)
                 {
                     ProtoDuneDL::HitsStruct tempHits;
                     tempHits.adc = adc;
