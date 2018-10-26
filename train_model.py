@@ -1,7 +1,12 @@
+import sys
 import argparse
 import configparser
-import sys
-#import get_data
+from os import path
+from pickle import dump
+from keras.layers import Input
+from tools.data_tools import DataSequence
+from tools.model_tools import get_unet_model, train_model
+from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
 
 def argument_parser():
     ap = argparse.ArgumentParser()
@@ -13,7 +18,8 @@ def argument_parser():
 
 def main():
     config = configparser.ConfigParser()
-    config.read('configuration.ini')
+    config_path = path.join("configurations", "master_configuration.ini")
+    config.read(config_path)
     print("\nReading info from configuration:")
 
     args = argument_parser()
@@ -46,7 +52,7 @@ def main():
             print("Exiting!\n")
             sys.exit(1)
 
-    BATCH_SIZE = config["DEFAULT"]["BATCH_SIZE"]
+    BATCH_SIZE = int(config["DEFAULT"]["BATCH_SIZE"])
     IMAGE_WIDTH = int(config["DEFAULT"]["IMAGE_WIDTH"])
     IMAGE_HEIGHT = int(config["DEFAULT"]["IMAGE_HEIGHT"])
     IMAGE_DEPTH = int(config["DEFAULT"]["IMAGE_DEPTH"])
@@ -55,8 +61,6 @@ def main():
     LABEL_FILE_TRAINING = config["DEFAULT"]["LABEL_FILE_TRAINING"]
     FEATURE_FILE_VALIDATION = config["DEFAULT"]["FEATURE_FILE_VALIDATION"]
     LABEL_FILE_VALIDATION = config["DEFAULT"]["LABEL_FILE_VALIDATION"]
-    FEATURE_FILE_TESTING = config["DEFAULT"]["FEATURE_FILE_TESTING"]
-    LABEL_FILE_TESTING = config["DEFAULT"]["LABEL_FILE_TESTING"]
     WEIGHTS = list(map(float, config["DEFAULT"]["WEIGHTS"].split()))
 
     print("NUM_TRAINING: {}".format(NUM_TRAINING))
@@ -72,11 +76,52 @@ def main():
     print("LABEL_FILE_TRAINING: {}".format(LABEL_FILE_TRAINING))
     print("FEATURE_FILE_VALIDATION: {}".format(FEATURE_FILE_VALIDATION))
     print("LABEL_FILE_VALIDATION: {}".format(LABEL_FILE_VALIDATION))
-    print("FEATURE_FILE_TESTING: {}".format(FEATURE_FILE_TESTING))
-    print("LABEL_FILE_TESTING: {}".format(LABEL_FILE_TESTING))
     print("WEIGHTS: {}".format(WEIGHTS))
+    print()
 
+    datasequence_training = DataSequence(feature_file=FEATURE_FILE_TRAINING,
+                                         label_file=LABEL_FILE_TRAINING,
+                                         image_width=IMAGE_WIDTH,
+                                         image_height=IMAGE_HEIGHT,
+                                         image_depth=IMAGE_DEPTH,
+                                         num_classes=len(CLASS_NAMES),
+                                         max_index=NUM_TRAINING,
+                                         batch_size=BATCH_SIZE)
 
+    datasequence_validation = DataSequence(feature_file=FEATURE_FILE_VALIDATION,
+                                           label_file=LABEL_FILE_VALIDATION,
+                                           image_width=IMAGE_WIDTH,
+                                           image_height=IMAGE_HEIGHT,
+                                           image_depth=IMAGE_DEPTH,
+                                           num_classes=len(CLASS_NAMES),
+                                           max_index=NUM_VALIDATION,
+                                           batch_size=BATCH_SIZE)
+
+    # Compile the model
+    input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
+    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES),
+                           num_filters=16, dropout=0.05, batchnorm=True)
+    model.compile(optimizer = 'adam', loss=weighted_loss(len(CLASS_NAMES), WEIGHTS), metrics = [three_classes_mean_iou])
+
+    model_and_weights = path.join("saved_models", "model_and_weights.hdf5")
+    # If weights exist, load them before training
+    if(path.isfile(model_and_weights)):
+        print("Old weights found!")
+        try:
+            model.load_weights(model_and_weights)
+            print("Old weights loaded successfully!")
+        except:
+            print("Old weights couldn't be loaded successfully, will continue!")
+
+    # Traing the model
+    history = train_model(model=model,
+                          X=datasequence_training, y=datasequence_validation,
+                          num_training=NUM_TRAINING, num_validation=NUM_VALIDATION,
+                          model_path=model_and_weights, num_epochs=NUM_EPOCHS, batch_size=BATCH_SIZE)
+
+    # Save the history
+    history_path = path.join("saved_models", "history.pkl")
+    dump(history, open(history_path, 'wb'))
 
 if __name__ == "__main__":
     main()

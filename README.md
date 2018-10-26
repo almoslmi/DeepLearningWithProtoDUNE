@@ -16,9 +16,16 @@ unzip input_files.zip -d input_files
 rm -rf input_files.zip
 ```
 
-### Train the network
+### Train the model
 ```
 python train_model.py --help
+```
+Details can be found in the configuration file.
+
+
+### Analyze the model
+```
+python analyze_model.py --help
 ```
 Details can be found in the configuration file.
 
@@ -58,7 +65,7 @@ python -m ipykernel install --user --name envDeepLearningWithProtoDUNE --display
 
 ```
 # Open the notebook
-jupyter notebook model_creation_playground.ipynb
+jupyter notebook miscellaneous/model_creation_playground.ipynb
 
 # Note: Make sure to change the kernel to envDeepLearningWithProtoDUNE using the drop-down menu (Kernel > Change kernel > envDeepLearningWithProtoDUNE)
 ```
