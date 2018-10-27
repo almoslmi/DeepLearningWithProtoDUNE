@@ -14,12 +14,11 @@ def argument_parser():
     ap.add_argument("-p", "--plots", required=True,
 	   help="Choose number of events to run over to generate plots.")
     ap.add_argument("-s", "--statistics", required=True,
-	   help='''Choose number of events to run over to calculate statistics.\n
-             Opetions 'Training', 'Development' or a number''')
+	   help='''Choose number of events to run over to calculate statistics.
+             Options are 'Training' or 'Development'.''')
     return vars(ap.parse_args())
 
 def intersection_over_union(y_true, y_pred, epsilon=1e-6):
-
     intersection = np.sum(y_true * y_pred)
     union = np.sum(y_true + y_pred)
 
@@ -34,12 +33,11 @@ def average_intersection_over_union(y_true, y_pred, class_names):
 
     total_iou = 0
     for c in range(len(class_names)):
-        average_over_batch_iou = intersection_over_union(y_true[:,:,:,c], y_pred[:,:,:,c])/n_preds
-        print('Average IoU for {} is: {:.3f}'.format(class_names[c], average_over_batch_iou))
-        total_iou += average_over_batch_iou
+        iou = intersection_over_union(y_true[:,:,:,c], y_pred[:,:,:,c])
+        print('IoU for {} is: {:.3f}'.format(class_names[c], iou))
+        total_iou += iou
 
-    print('Global average IoU is: {:.3f}'.format(total_iou/len(class_names)))
-
+    print('Average IoU is: {:.3f}'.format(total_iou/len(class_names)))
 
 def main():
     args = argument_parser()
