@@ -1,7 +1,7 @@
 # Goal
 
 
-## Instructions to train the network
+## Instructions
 
 ### Git clone the code
 ```

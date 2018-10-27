@@ -12,9 +12,9 @@ from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
 def argument_parser():
     ap = argparse.ArgumentParser()
     ap.add_argument("-o", "--operation", required=True,
-	   help="Choose operation between 'Training' or 'Development'")
+	   help="Choose operation between 'Training' or 'Development.'")
     ap.add_argument("-e", "--epoch", required=True,
-	   help="Options are 'Default' or a number")
+	   help="Options are 'Default' or a number.")
     return vars(ap.parse_args())
 
 def main():
