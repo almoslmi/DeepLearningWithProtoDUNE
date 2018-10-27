@@ -5,6 +5,7 @@ from os import path
 from pickle import dump
 from keras.layers import Input
 from tools.data_tools import DataSequence
+from tools.plotting_tools import plot_history
 from tools.model_tools import get_unet_model, train_model
 from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
 
@@ -28,7 +29,6 @@ def main():
 
         NUM_TRAINING = int(config["TRAINING"]["NUM_TRAINING"])
         NUM_VALIDATION = int(config["TRAINING"]["NUM_VALIDATION"])
-        NUM_TESTING = int(config["TRAINING"]["NUM_TESTING"])
         NUM_EPOCHS = int(config["TRAINING"]["NUM_EPOCHS"])
 
     elif args["operation"] == "Development":
@@ -36,7 +36,6 @@ def main():
 
         NUM_TRAINING = int(config["DEVELOPMENT"]["NUM_TRAINING"])
         NUM_VALIDATION = int(config["DEVELOPMENT"]["NUM_VALIDATION"])
-        NUM_TESTING = int(config["DEVELOPMENT"]["NUM_TESTING"])
         NUM_EPOCHS = int(config["DEVELOPMENT"]["NUM_EPOCHS"])
 
     else:
@@ -65,7 +64,6 @@ def main():
 
     print("NUM_TRAINING: {}".format(NUM_TRAINING))
     print("NUM_VALIDATION: {}".format(NUM_VALIDATION))
-    print("NUM_TESTING: {}".format(NUM_TESTING))
     print("NUM_EPOCHS: {}".format(NUM_EPOCHS))
     print("BATCH_SIZE: {}".format(BATCH_SIZE))
     print("IMAGE_WIDTH: {}".format(IMAGE_WIDTH))
@@ -119,9 +117,12 @@ def main():
                           num_training=NUM_TRAINING, num_validation=NUM_VALIDATION,
                           model_path=model_and_weights, num_epochs=NUM_EPOCHS, batch_size=BATCH_SIZE)
 
-    # Save the history
-    history_path = path.join("saved_models", "history.pkl")
-    dump(history, open(history_path, 'wb'))
+    # Plot the history
+    loss_path = path.join("plots", "loss_vs_epoch.pdf")
+    plot_history(history, quantity='loss', title='Weighted loss', y_label='Loss', plot_name=loss_path)
+
+    iou_path = path.join("plots", "iou_vs_epoch.pdf")
+    plot_history(history, quantity='mean_iou', title='Mean IoU', y_label='Mean IoU', plot_name=iou_path)
 
 if __name__ == "__main__":
     main()

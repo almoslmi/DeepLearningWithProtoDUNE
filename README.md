@@ -19,6 +19,9 @@ rm -rf input_files.zip
 ### Train the model
 ```
 python train_model.py --help
+
+# Example
+python train_model.py -o Development -e 5
 ```
 Details can be found in the configuration file.
 
@@ -26,8 +29,10 @@ Details can be found in the configuration file.
 ### Analyze the model
 ```
 python analyze_model.py --help
+
+# Example
+python analyze_model.py -p 5 -s Development
 ```
-Details can be found in the configuration file.
 
 
 ### Additional information

@@ -2,23 +2,52 @@ import sys
 import argparse
 import configparser
 from os import path
+import numpy as np
 from pickle import load
-from tools.data_tools import get_data_generator
-from tools.plotting_tools import plot_history
+from keras.models import load_model
+from tools.plotting_tools import plot_feature_label_prediction
+from tools.data_tools import DataSequence, get_data_generator, preprocess_feature, preprocess_label
+from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
 
 def argument_parser():
     ap = argparse.ArgumentParser()
-    ap.add_argument("-e", "--events", required=True,
-	   help="Choose number of events to run over.")
+    ap.add_argument("-p", "--plots", required=True,
+	   help="Choose number of events to run over to generate plots.")
+    ap.add_argument("-s", "--statistics", required=True,
+	   help='''Choose number of events to run over to calculate statistics.\n
+             Opetions 'Training', 'Development' or a number''')
     return vars(ap.parse_args())
+
+def intersection_over_union(y_true, y_pred, epsilon=1e-6):
+
+    intersection = np.sum(y_true * y_pred)
+    union = np.sum(y_true + y_pred)
+
+    return ((2. * intersection + epsilon)/(union + epsilon))
+
+def average_intersection_over_union(y_true, y_pred, class_names):
+    """
+    Average over classes and batch
+    """
+    n_preds = y_pred.shape[0]
+    print('\nNumber of validation samples IoU evaulated on: {}'.format(n_preds))
+
+    total_iou = 0
+    for c in range(len(class_names)):
+        average_over_batch_iou = intersection_over_union(y_true[:,:,:,c], y_pred[:,:,:,c])/n_preds
+        print('Average IoU for {} is: {:.3f}'.format(class_names[c], average_over_batch_iou))
+        total_iou += average_over_batch_iou
+
+    print('Global average IoU is: {:.3f}'.format(total_iou/len(class_names)))
+
 
 def main():
     args = argument_parser()
     try:
-        NUM_EVENTS = int(args["events"])
-        print("Running over {} testing events.".format(NUM_EVENTS))
+        NUM_EVENTS_PLOTS = int(args["plots"])
+        print("\nRunning over {} testing events to generate plots.".format(NUM_EVENTS_PLOTS))
     except ValueError:
-        print("\nError: Events should be an integer.")
+        print("\nError: Events to make plots should be an integer.")
         print("Exiting!\n")
         sys.exit(1)
 
@@ -27,10 +56,22 @@ def main():
     config.read(config_path)
     print("\nReading info from configuration:")
 
+    if args["statistics"] == "Training":
+        NUM_TESTING = int(config["TRAINING"]["NUM_TESTING"])
+    elif args["statistics"] == "Development":
+        NUM_TESTING = int(config["DEVELOPMENT"]["NUM_TESTING"])
+    else:
+        print("\nError: Statistics should be either 'Training' or 'Development'")
+        print("Exiting!\n")
+        sys.exit(1)
+
+    print("Running over {} testing events to calculate statistics.\n".format(NUM_TESTING))
+
     IMAGE_WIDTH = int(config["DEFAULT"]["IMAGE_WIDTH"])
     IMAGE_HEIGHT = int(config["DEFAULT"]["IMAGE_HEIGHT"])
     IMAGE_DEPTH = int(config["DEFAULT"]["IMAGE_DEPTH"])
     CLASS_NAMES = config["DEFAULT"]["CLASS_NAMES"].split()
+    WEIGHTS = list(map(float, config["DEFAULT"]["WEIGHTS"].split()))
 
     FEATURE_FILE_TESTING = config["DEFAULT"]["FEATURE_FILE_TESTING"]
     LABEL_FILE_TESTING = config["DEFAULT"]["LABEL_FILE_TESTING"]
@@ -40,18 +81,55 @@ def main():
     print("IMAGE_DEPTH: {}".format(IMAGE_DEPTH))
     print("CLASS_NAMES: {}".format(CLASS_NAMES))
     print("FEATURE_FILE_TESTING: {}".format(FEATURE_FILE_TESTING))
-    print("LABEL_FILE_TESTING: {}\n".format(LABEL_FILE_TESTING))
+    print("LABEL_FILE_TESTING: {}".format(LABEL_FILE_TESTING))
+    print("WEIGHTS: {}".format(WEIGHTS))
     print()
 
-    # Get the history
-    history_path = path.join("saved_models", "history.pkl")
-    history = load(open(history_path, 'rb'))
+    # Get the model
+    model_path = path.join("saved_models", "model_and_weights.hdf5")
+    model = load_model(model_path, custom_objects={"loss": weighted_loss(len(CLASS_NAMES), WEIGHTS),
+                                                   "three_classes_mean_iou": three_classes_mean_iou})
 
-    # Plot the history
-    #hisotry_plots_path = path.join("plots", "events", "categories_validation_event_{}.pdf".format(count))
-    #plot_history(history):
+    # Make comparision plots
+    generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
+    count = 0
+    for X, y in generator_testing:
+        if count >= NUM_EVENTS_PLOTS:
+            break
+        count += 1
 
-    print(history.keys())
+        X_preprocessed = preprocess_feature(X, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH)
+        y_preprocessed = preprocess_label(y, IMAGE_WIDTH, IMAGE_HEIGHT, len(CLASS_NAMES))
+        y_preprocessed_max = np.argmax(y_preprocessed, axis=3)
+
+        prediction = model.predict_on_batch(X_preprocessed)
+        prediction_max = np.argmax(prediction, axis=3)
+
+        feature_image = X_preprocessed.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
+        label_image = y_preprocessed_max.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
+        prediction_image = prediction_max.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
+
+        plot_feature_label_prediction_path = path.join("plots",  "predictions", "prediction_event_{}.pdf".format(count))
+        plot_feature_label_prediction(feature_image, label_image,  prediction_image,
+                                      'Feature', 'Label', 'Model prediction', CLASS_NAMES, plot_feature_label_prediction_path)
+
+    # Calculate Statistics
+    samples = np.zeros((NUM_TESTING, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
+    targets = np.zeros((NUM_TESTING, IMAGE_WIDTH, IMAGE_HEIGHT, len(CLASS_NAMES)))
+
+    generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
+    count = 0
+    for X, y in generator_testing:
+        if count >= NUM_TESTING:
+            break
+        samples[count,:,:,:] = preprocess_feature(X, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH)
+        targets[count,:,:,:] = preprocess_label(y, IMAGE_WIDTH, IMAGE_HEIGHT, len(CLASS_NAMES))
+        count += 1
+
+    predictions = model.predict_on_batch(samples)
+    average_intersection_over_union(targets, predictions, CLASS_NAMES)
+
+    print("\nDone!\n")
 
 if __name__ == "__main__":
     main()
