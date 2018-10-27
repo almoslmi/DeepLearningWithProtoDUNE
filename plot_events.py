@@ -52,9 +52,9 @@ def main():
     print("LABEL_FILE_TESTING: {}\n".format(LABEL_FILE_TESTING))
     print()
 
-    feature_generator_training = get_data_generator(FEATURE_FILE_TRAINING, LABEL_FILE_TRAINING)
-    feature_generator_validation = get_data_generator(FEATURE_FILE_VALIDATION, LABEL_FILE_VALIDATION)
-    feature_generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
+    generator_training = get_data_generator(FEATURE_FILE_TRAINING, LABEL_FILE_TRAINING)
+    generator_validation = get_data_generator(FEATURE_FILE_VALIDATION, LABEL_FILE_VALIDATION)
+    generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
 
     plot_path = os.path.join("plots",  "events", "*.pdf")
     files = glob.glob(plot_path)
@@ -62,7 +62,7 @@ def main():
         os.remove(f)
 
     count = 0
-    for X, y in feature_generator_training:
+    for X, y in generator_training:
         if count >= NUM_EVENTS:
             break
         count += 1
@@ -76,7 +76,7 @@ def main():
         plot_categories(feature_image, label_image, CLASS_NAMES, plot_categories_path)
 
     count = 0
-    for X, y in feature_generator_validation:
+    for X, y in generator_validation:
         if count >= NUM_EVENTS:
             break
         count += 1
@@ -90,7 +90,7 @@ def main():
         plot_categories(feature_image, label_image, CLASS_NAMES, plot_categories_path)
 
     count = 0
-    for X, y in feature_generator_testing:
+    for X, y in generator_testing:
         if count >= NUM_EVENTS:
             break
         count += 1
