@@ -92,7 +92,14 @@ def plot_feature_label_prediction(feature_image, label_image, prediction_image,
     """
     fig, (ax0, ax1, ax2) = plt.subplots(1, 3, figsize=(20,5), facecolor='w')
 
-    get_feature_image(feature_image, fig, ax0, feature_title)
+    # Featured is scaled to be between 0 and 1
+    c = ax0.imshow(feature_image, cmap='winter_r',interpolation='none', origin='lower',
+                   norm=LogNorm(vmin=1E-3, vmax=1.0))
+    fig.colorbar(c, ax=ax0)
+    ax0.set_xlabel("Global wire no.", fontsize=15, fontname='Georgia',fontweight='bold')
+    ax0.set_ylabel("TDC", fontsize=1, fontname='Georgia',fontweight='bold')
+    ax0.set_title(feature_title, fontsize=20,fontname='Georgia',fontweight='bold')
+
     get_label_image(label_image, class_names, fig, ax1, label_title)
     get_label_image(prediction_image, class_names, fig, ax2, prediction_title)
 
