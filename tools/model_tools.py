@@ -83,7 +83,7 @@ def train_model(model, X, y, num_training, num_validation, model_path, num_epoch
                                   epochs=num_epochs,
                                   validation_data=y,
                                   validation_steps= num_validation//batch_size,
-                                  verbose=1,
+                                  verbose=2,
                                   callbacks=[check_point, early_stop, reduce_lr])
 
     return history
