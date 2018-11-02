@@ -1,6 +1,7 @@
 import sys
 import argparse
 import configparser
+import os
 from os import path
 from pickle import dump
 from keras.layers import Input
@@ -8,6 +9,10 @@ from tools.data_tools import DataSequence
 from tools.plotting_tools import plot_history
 from tools.model_tools import get_unet_model, train_model
 from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
+
+# Needed when using single GPU with sbatch; else will get the following error
+# failed call to cuInit: CUDA_ERROR_NO_DEVICE
+os.environ["CUDA_VISIBLE_DEVICES"] = "0" 
 
 def argument_parser():
     ap = argparse.ArgumentParser()
