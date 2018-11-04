@@ -18,7 +18,7 @@ def get_class_weights(y):
 
 def main():
     config = configparser.ConfigParser()
-    config_path = os.pathjoin("configurations", "master_configuration.ini")
+    config_path = os.path.join("configurations", "master_configuration.ini")
     config.read(config_path)
     print("\nReading info from configuration:")
 
@@ -38,8 +38,8 @@ def main():
         for index, weight in class_weights.items():
             weights[index].append(weight)
 
-    ranges = [(0,2), (0,50), (0, 3500)]
-    plot_path = os.pathjoin("plots", "weights_median.pdf")
+    ranges = [(0,2), (0,50), (0, 1700)]
+    plot_path = os.path.join("plots", "weights_median.pdf")
     plot_weights_median(weights, ranges, CLASS_NAMES, plot_path)
     print("\nDone! Plot with median weights for each class is saved at {}!\n".format(plot_path))
 

@@ -7,6 +7,7 @@
 #include <TROOT.h>
 #include <TFile.h>
 #include <TTree.h>
+#include <TH1.h>
 
 // DeepLearning includes
 #include "dune/Protodune/DeepLearning/Tools/DataStruct.h"
@@ -17,8 +18,8 @@
 
 using namespace std;
 
-RootToCSV :: RootToCSV(const TString input, const TString output)
-    : InputFile(input), OutputDirectory(output)
+RootToCSV :: RootToCSV(const TString input, const TString output, const int minHits)
+    : InputFile(input), OutputDirectory(output), MinHitsBeam(minHits)
 {
 }
 
@@ -32,6 +33,10 @@ void RootToCSV::SetOutputDirectory(const TString output)
     OutputDirectory = output;
 }
 
+void RootToCSV::SetMinHitsBeam(const int minHits)
+{
+    MinHitsBeam = minHits;
+}
 ///////////////////////////////////////////////////////////////////////////////////////
 void RootToCSV::MakeCSV()
 {
@@ -45,18 +50,25 @@ void RootToCSV::MakeCSV()
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     unsigned int nEntries = TreeInput->GetEntries();
-    cout<<endl;
+    cout << endl;
     if(nEntries <= 0)
         {
-            cout << "Error! There are no entries in the Tree." << nEntries << endl<<endl;
+            cout << "Error! There are no entries in the Tree." << nEntries << endl << endl;
         }
     else
         {
-            cout << "Total Entries in the Tree is: " << nEntries << endl<<endl;
+            cout << "Total Entries in the Tree is: " << nEntries << endl << endl;
         }
+
+    cout << "Min hits for beam is: " << MinHitsBeam << endl;
 
     ofstream FileOutput[6]; // 3 planes x (Feature + Label)
     TString FileName[6] = {"feature_u.csv", "feature_v.csv", "feature_w.csv", "label_u.csv", "label_v.csv", "label_w.csv"};
+
+    // Save histograms for hits
+    TFile *HistogramFile = new TFile("Histograms.root", "RECREATE");
+    TH1D *hHits = new TH1D("hHits", "", 100, 0, 100000);
+    TH1D *hHitsBeam = new TH1D("hHitsBeam", "", 200, 0, 10000);
 
     for (unsigned int iFile = 0; iFile < 6; iFile++)
         {
@@ -75,14 +87,36 @@ void RootToCSV::MakeCSV()
             FileOutput[iFile] << endl;
         }
 
+    unsigned int count = 0;
     for(unsigned int iEntry = 0; iEntry < nEntries; iEntry++)
         {
             TreeInput->GetEntry(iEntry);
 
             unsigned int nHits = pHitsStruct->size();
-            //TO DO: Min hit cut can be made here
-            //cout << "Total hits for entry " << iEntry + 1 << " is: " << nHits << endl;
-	    cout << "Event: " << iEntry + 1 << endl;
+            hHits->Fill(nHits);
+
+            unsigned int nHitsBeam = 0;
+            for(unsigned int iHit = 0; iHit < nHits; iHit++)
+                {
+                    ProtoDuneDL::HitsStruct hHitsStruct = (*pHitsStruct)[iHit];
+                    if(hHitsStruct.origin == ProtoDuneDL::Labels::Beam)
+                        {
+                            nHitsBeam++;
+                        }
+                }
+
+            hHitsBeam->Fill(nHitsBeam);
+
+            // Require minimum no. of hits from Beam
+            if(nHitsBeam < MinHitsBeam)
+                {
+                    continue;
+                }
+            count++;
+
+            cout << "Event: " << count << endl;
+            //cout << "Total hits: " << nHits << endl;
+            //cout << "Beam hits: " << nHitsBeam << endl<<endl;
 
             static double FeatureMap[ProtoDuneDL::MaxPlanes][ProtoDuneDL::MaxTDCs][ProtoDuneDL::MaxWires];
             static int LabelMap[ProtoDuneDL::MaxPlanes][ProtoDuneDL::MaxTDCs][ProtoDuneDL::MaxWires];
@@ -147,19 +181,22 @@ void RootToCSV::MakeCSV()
         {
             FileOutput[iFile].close();
         }
+    HistogramFile->Write();
+    HistogramFile->Close();
 }
 
 int main(int argc, char* argv[])
 {
-    if(argc != 3)
+    if(argc != 4)
         {
-            cout << "Error! Please provide 2 arguments: input file and output directory name." << endl;
+            cout << "Error! Please provide 3 arguments: input file, output directory name, and min beam hits." << endl;
             return 1;
         }
 
     RootToCSV *myRootToCSV = new RootToCSV();
     myRootToCSV->SetInputFile(argv[1]);
     myRootToCSV->SetOutputDirectory(argv[2]);
+    myRootToCSV->SetMinHitsBeam(atoi(argv[3]));
     myRootToCSV->MakeCSV();
 
     return 0;

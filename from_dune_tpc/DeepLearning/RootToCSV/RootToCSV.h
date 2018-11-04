@@ -9,15 +9,17 @@ class RootToCSV
 
     TString InputFile;
     TString OutputDirectory;
+    unsigned int MinHitsBeam;
 
  public :
 
     // With default values
-    RootToCSV(const TString input = "NONE", const TString output = "NONE");
+    RootToCSV(const TString input = "NONE", const TString output = "NONE", const int minHits = 500);
 
     // To set values of choice
     void SetInputFile(const TString input);
     void SetOutputDirectory(const TString output);
+    void SetMinHitsBeam(const int minHits);
 
     // To make CSV file
     void MakeCSV();
