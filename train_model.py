@@ -12,7 +12,7 @@ from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
 
 # Needed when using single GPU with sbatch; else will get the following error
 # failed call to cuInit: CUDA_ERROR_NO_DEVICE
-os.environ["CUDA_VISIBLE_DEVICES"] = "0" 
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 def argument_parser():
     ap = argparse.ArgumentParser()
@@ -103,8 +103,13 @@ def main():
     # Compile the model
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
     model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES),
-                           num_filters=16, dropout=0.05, batchnorm=True)
-    model.compile(optimizer = 'adam', loss=weighted_loss(len(CLASS_NAMES), WEIGHTS), metrics = [three_classes_mean_iou])
+                           num_filters=16,
+                           dropout=0.05,
+                           batchnorm=True)
+
+    model.compile(optimizer = 'adam',
+                  loss=weighted_loss(len(CLASS_NAMES), WEIGHTS),
+                  metrics = [three_classes_mean_iou])
 
     model_and_weights = path.join("saved_models", "model_and_weights.hdf5")
     # If weights exist, load them before training
@@ -124,10 +129,10 @@ def main():
 
     # Plot the history
     loss_path = path.join("plots", "loss_vs_epoch.pdf")
-    plot_history(history, quantity='loss', title='Weighted loss', y_label='Loss', plot_name=loss_path)
+    plot_history(history, quantity='loss', plot_title='Weighted loss', y_label='Loss', plot_name=loss_path)
 
     iou_path = path.join("plots", "iou_vs_epoch.pdf")
-    plot_history(history, quantity='mean_iou', title='Mean IoU', y_label='Mean IoU', plot_name=iou_path)
+    plot_history(history, quantity='three_classes_mean_iou', plot_title='Mean IoU', y_label='Mean IoU', plot_name=iou_path)
 
 if __name__ == "__main__":
     main()

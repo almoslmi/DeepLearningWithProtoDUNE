@@ -78,8 +78,8 @@ class DataSequence(Sequence):
         self.reader1 = csv.reader(open(self.feature_file, "r"))
         self.reader2 = csv.reader(open(self.label_file, "r"))
 
-        # Skip the header row and count coln
-        self.n_col = len(next(self.reader1))
+        # Skip the header row
+        next(self.reader1)
         next(self.reader2)
 
     def __data_generation(self, rows):
@@ -93,11 +93,19 @@ class DataSequence(Sequence):
                 array_row1 = np.array(row1, dtype=np.float)
                 samples[j,:,:,:] = preprocess_feature(array_row1,
                                                       self.image_width, self.image_height, self.image_depth)
-                next(self.reader1)
+                try:
+                    next(self.reader1)
+                except StopIteration:
+                    print("CSV iteration end. Calling 'break'.")
+                    break
 
                 array_row2 = np.array(row2, dtype=np.int)
                 targets[j,:,:,:] = preprocess_label(array_row2,
                                                     self.image_width, self.image_height, self.num_classes)
-                next(self.reader2)
+                try:
+                    next(self.reader2)
+                except StopIteration:
+                    print("CSV iteration end. Calling 'break'.")
+                    break
 
         return samples, targets
