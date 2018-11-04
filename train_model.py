@@ -1,9 +1,7 @@
+import os
 import sys
 import argparse
 import configparser
-import os
-from os import path
-from pickle import dump
 from keras.layers import Input
 from tools.data_tools import DataSequence
 from tools.plotting_tools import plot_history
@@ -24,7 +22,7 @@ def argument_parser():
 
 def main():
     config = configparser.ConfigParser()
-    config_path = path.join("configurations", "master_configuration.ini")
+    config_path = os.pathjoin("configurations", "master_configuration.ini")
     config.read(config_path)
     print("\nReading info from configuration:")
 
@@ -111,9 +109,9 @@ def main():
                   loss=weighted_loss(len(CLASS_NAMES), WEIGHTS),
                   metrics = [three_classes_mean_iou])
 
-    model_and_weights = path.join("saved_models", "model_and_weights.hdf5")
+    model_and_weights = os.pathjoin("saved_models", "model_and_weights.hdf5")
     # If weights exist, load them before training
-    if(path.isfile(model_and_weights)):
+    if(os.pathisfile(model_and_weights)):
         print("Old weights found!")
         try:
             model.load_weights(model_and_weights)
@@ -128,10 +126,10 @@ def main():
                           model_path=model_and_weights, num_epochs=NUM_EPOCHS, batch_size=BATCH_SIZE)
 
     # Plot the history
-    loss_path = path.join("plots", "loss_vs_epoch.pdf")
+    loss_path = os.pathjoin("plots", "loss_vs_epoch.pdf")
     plot_history(history, quantity='loss', plot_title='Weighted loss', y_label='Loss', plot_name=loss_path)
 
-    iou_path = path.join("plots", "iou_vs_epoch.pdf")
+    iou_path = os.pathjoin("plots", "iou_vs_epoch.pdf")
     plot_history(history, quantity='three_classes_mean_iou', plot_title='Mean IoU', y_label='Mean IoU', plot_name=iou_path)
 
 if __name__ == "__main__":

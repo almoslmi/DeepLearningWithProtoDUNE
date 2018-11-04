@@ -21,11 +21,11 @@ def make_conv2d_block(input_tensor, num_filters, kernel_size=3, batchnorm=True):
     x = Activation("relu")(x)
     return x
 
-def get_unet_model(input_tensor, num_classes, num_filters=16, dropout=0.5, batchnorm=True):
+def get_unet_model(input_tensor, num_classes, num_filters=16, dropout=0.05, batchnorm=True):
     # Vontracting path
     c1 = make_conv2d_block(input_tensor, num_filters=num_filters*1, kernel_size=3, batchnorm=batchnorm)
     p1 = MaxPooling2D((2, 2)) (c1)
-    p1 = Dropout(dropout*0.5)(p1)
+    p1 = Dropout(dropout)(p1)
 
     c2 = make_conv2d_block(p1, num_filters=num_filters*2, kernel_size=3, batchnorm=batchnorm)
     p2 = MaxPooling2D((2, 2)) (c2)

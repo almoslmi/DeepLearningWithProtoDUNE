@@ -1,7 +1,7 @@
+import os
 import configparser
-from collections import Counter
 from tqdm import tqdm
-from os import path
+from collections import Counter
 from tools.data_tools import get_data_generator
 from tools.plotting_tools import plot_weights_median
 
@@ -18,7 +18,7 @@ def get_class_weights(y):
 
 def main():
     config = configparser.ConfigParser()
-    config_path = path.join("configurations", "master_configuration.ini")
+    config_path = os.pathjoin("configurations", "master_configuration.ini")
     config.read(config_path)
     print("\nReading info from configuration:")
 
@@ -39,7 +39,7 @@ def main():
             weights[index].append(weight)
 
     ranges = [(0,2), (0,50), (0, 3500)]
-    plot_path = path.join("plots", "weights_median.pdf")
+    plot_path = os.pathjoin("plots", "weights_median.pdf")
     plot_weights_median(weights, ranges, CLASS_NAMES, plot_path)
     print("\nDone! Plot with median weights for each class is saved at {}!\n".format(plot_path))
 
