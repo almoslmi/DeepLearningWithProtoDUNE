@@ -428,7 +428,8 @@ namespace ProtoDuneDL
                     tempHits.origin = hitOrigin;
                     pHitsStruct->push_back(tempHits);
                 }
-        }
+	    }
+
     tHitsTree->Fill();
 
     if(fDebug)

@@ -11,7 +11,7 @@ cd DeepLearningWithProtoDUNE
 
 ### Download the dataset
 ```
-wget -O input_files.zip https://www.dropbox.com/sh/smfc0w9i2zpl4fh/AACHhYEE0_T2ogFfJkQy8pjCa
+wget -O input_files.zip https://www.dropbox.com/sh/12du7a9k2b7m3d2/AABTNyBQ2Qu5j9rxiApAmw2la
 unzip input_files.zip -d input_files
 rm -rf input_files.zip
 ```
@@ -51,14 +51,14 @@ KERAS_BACKEND=tensorflow python -c "from keras import backend"
 
 ### To change the weights
 ```
-python calculate_weights.py 
+python calculate_weights.py
 ```
 It will run over the default traning files in the configuration. Median for each class will be displayed in plots/weights_median.pdf.
 
 ### To make plots of events
 ```
 # For 10 events
-python plot_events.py --events 10 
+python plot_events.py --events 10
 ```
 
 ### To open jupyter notebook
