@@ -23,7 +23,7 @@ def main():
         sys.exit(1)
 
     config = configparser.ConfigParser()
-    config_path = path.join("configurations", "master_configuration.ini")
+    config_path = os.path.join("configurations", "master_configuration.ini")
     config.read(config_path)
     print("\nReading info from configuration:")
 
@@ -83,10 +83,10 @@ def main():
 
         feature_image = X.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
         label_image = y.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
-        plot_feature_label_path = path.join("plots",  "events", "feature_label_validaiton_event_{}.pdf".format(count))
+        plot_feature_label_path = os.path.join("plots",  "events", "feature_label_validaiton_event_{}.pdf".format(count))
         plot_feature_label(feature_image, label_image,  'Feature', 'Label', CLASS_NAMES, plot_feature_label_path)
 
-        plot_categories_path = path.join("plots", "events", "categories_validation_event_{}.pdf".format(count))
+        plot_categories_path = os.path.join("plots", "events", "categories_validation_event_{}.pdf".format(count))
         plot_categories(feature_image, label_image, CLASS_NAMES, plot_categories_path)
 
     count = 0
@@ -97,10 +97,10 @@ def main():
 
         feature_image = X.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
         label_image = y.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
-        plot_feature_label_path = path.join("plots",  "events", "feature_label_testing_event_{}.pdf".format(count))
+        plot_feature_label_path = os.path.join("plots",  "events", "feature_label_testing_event_{}.pdf".format(count))
         plot_feature_label(feature_image, label_image,  'Feature', 'Label', CLASS_NAMES, plot_feature_label_path)
 
-        plot_categories_path = path.join("plots", "events", "categories_testing_event_{}.pdf".format(count))
+        plot_categories_path = os.path.join("plots", "events", "categories_testing_event_{}.pdf".format(count))
         plot_categories(feature_image, label_image, CLASS_NAMES, plot_categories_path)
 
     print("\nDone! Plots are saved in \plots!\n")

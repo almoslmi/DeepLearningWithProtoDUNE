@@ -1,6 +1,6 @@
-from keras.utils import np_utils, Sequence
 import csv
 import numpy as np
+from keras.utils import np_utils, Sequence
 
 def get_data_generator(feature_file, label_file):
     """
