@@ -106,11 +106,11 @@ def plot_feature_label_prediction(feature_image, label_image, prediction_image,
     fig.savefig(plot_name, bbox_inches='tight')
     plt.close(fig)
 
-def plot_history(history, quantity, title, y_label, plot_name):
-    fig, axes = plt.subplots(1, 1, figsize=(7,7), facecolor='w')
+def plot_history(history, quantity, plot_title, y_label, plot_name):
+    fig, axes = plt.subplots(1, 1, figsize=(10,7), facecolor='w')
     axes.plot(history.history[quantity.lower()])
     axes.plot(history.history['val_{}'.format(quantity.lower())])
-    axes.title(title)
+    axes.set_title(plot_title)
     axes.set_ylabel(y_label, fontsize=1, fontname='DejaVu Sans',fontweight='bold')
     axes.set_xlabel('Epoch', fontsize=15, fontname='DejaVu Sans',fontweight='bold')
 
