@@ -5,7 +5,7 @@ import numpy as np
 import configparser
 from keras.models import load_model
 from tools.plotting_tools import plot_feature_label_prediction
-from tools.loss_metrics_tools import weighted_loss, three_classes_mean_iou
+from tools.loss_metrics_tools import weighted_categorical_crossentropy, three_classes_mean_iou
 from tools.data_tools import DataSequence, get_data_generator, preprocess_feature, preprocess_label
 
 def argument_parser():
@@ -49,7 +49,7 @@ def main():
         sys.exit(1)
 
     config = configparser.ConfigParser()
-    config_path = os.pathjoin("configurations", "master_configuration.ini")
+    config_path = os.path.join("configurations", "master_configuration.ini")
     config.read(config_path)
     print("\nReading info from configuration:")
 
@@ -83,8 +83,8 @@ def main():
     print()
 
     # Get the model
-    model_path = os.pathjoin("saved_models", "model_and_weights.hdf5")
-    model = load_model(model_path, custom_objects={"loss": weighted_loss(len(CLASS_NAMES), WEIGHTS),
+    model_path = os.path.join("saved_models", "model_and_weights.hdf5")
+    model = load_model(model_path, custom_objects={"loss": weighted_categorical_crossentropy(WEIGHTS),
                                                    "three_classes_mean_iou": three_classes_mean_iou})
 
     # Make comparision plots
@@ -106,7 +106,7 @@ def main():
         label_image = y_preprocessed_max.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
         prediction_image = prediction_max.reshape(IMAGE_WIDTH, IMAGE_HEIGHT)
 
-        plot_feature_label_prediction_path = os.pathjoin("plots",  "predictions", "prediction_event_{}.pdf".format(count))
+        plot_feature_label_prediction_path = os.path.join("plots",  "predictions", "prediction_event_{}.pdf".format(count))
         plot_feature_label_prediction(feature_image, label_image,  prediction_image,
                                       'Feature', 'Label', 'Model prediction', CLASS_NAMES, plot_feature_label_prediction_path)
 
