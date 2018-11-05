@@ -3,6 +3,7 @@ import sys
 import argparse
 import configparser
 from keras.layers import Input
+from keras.optimizers import Adam
 from tools.data_tools import DataSequence
 from tools.plotting_tools import plot_history
 from tools.model_tools import get_unet_model, train_model
@@ -100,18 +101,18 @@ def main():
 
     # Compile the model
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
-    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES),
-                           num_filters=16,
-                           dropout=0.05,
+    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=32,
+                           dropout=0.01,
                            batchnorm=True)
 
-    model.compile(optimizer='adam',
+    model.compile(optimizer=Adam(lr=0.0005),
                   loss=weighted_categorical_crossentropy(WEIGHTS),
                   metrics=[three_classes_mean_iou])
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")
-    # If weights exist, load them before training
-    if(os.path.isfile(model_and_weights)):
+    # If weights exist, load them before continuing training
+    continue_training = False
+    if(os.path.isfile(model_and_weights) and continue_training):
         print("Old weights found!")
         try:
             model.load_weights(model_and_weights)

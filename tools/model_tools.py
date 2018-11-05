@@ -68,7 +68,7 @@ def get_unet_model(input_tensor, num_classes, num_filters=16, dropout=0.05, batc
     return model
 
 def train_model(model, X, y, num_training, num_validation, model_path, num_epochs=5, batch_size=10,
-                early_stop_patience=15, reduce_lr_patience=3, reduce_lr_factor=0.3, reduce_lr_cooldown=3):
+                early_stop_patience=25, reduce_lr_patience=5, reduce_lr_factor=0.3, reduce_lr_cooldown=5):
     # Stop training when a monitored quantity has stopped improving after certain epochs
     early_stop = EarlyStopping(patience=early_stop_patience, verbose=1)
 
