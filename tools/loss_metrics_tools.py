@@ -1,33 +1,29 @@
 import tensorflow as tf
 from keras import backend as K
 
-def weighted_loss(num_classes, coefficients):
+def weighted_categorical_crossentropy(weights):
     """
-    Gets weighted categorical cross entropy.
+    Weighted version of keras.objectives.categorical_crossentropy.
     Use this loss function with median frequency coefficients weights for class balance.
     """
-    coefficients = tf.constant(coefficients)
-    num_classes = tf.constant(num_classes)
 
-    def loss(labels, logits):
-        with tf.name_scope('loss_1'):
-            logits = tf.reshape(logits, (-1, num_classes))
-            epsilon = tf.constant(value=1e-10)
+    # Convert weights to a variable instance (with Keras metadata included)
+    weights = K.variable(weights)
+        
+    def loss(y_true, y_pred):
+        # Scale predictions so that the class probas of each sample sum to 1
+        y_pred /= K.sum(y_pred, axis=-1, keepdims=True)
 
-            logits = logits + epsilon
-            # consturct one-hot label array
-            labels = tf.to_float(tf.reshape(labels, (-1, num_classes)))
-            softmax = tf.nn.softmax(logits)
+        # Clip to prevent NaN's and Inf's
+        y_pred = K.clip(y_pred, K.epsilon(), 1 - K.epsilon())
 
-            cross_entropy = -tf.reduce_sum(tf.multiply(labels * tf.log(softmax + epsilon),
-                                                       coefficients), reduction_indices=[1])
-            cross_entropy_mean = tf.reduce_mean(cross_entropy, name='cross_entropy')
-
-            tf.add_to_collection('losses', cross_entropy_mean)
-            loss = tf.add_n(tf.get_collection('losses'), name='total_loss')
-            #loss = cross_entropy_mean
+        # Do the loss calculation
+        loss = y_true * K.log(y_pred) * weights
+        loss = -K.sum(loss, axis=-1)
         return loss
+    
     return loss
+
 
 # For Keras, custom metrics can be passed at the compilation step but
 # the function would need to take (y_true, y_pred) as arguments and return a single tensor value.

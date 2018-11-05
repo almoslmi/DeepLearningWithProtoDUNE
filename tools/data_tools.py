@@ -64,6 +64,8 @@ class DataSequence(Sequence):
         else:
             self.rows = min(self.batch_size, self.max_index)
 
+        # print("index {}; full index: {}; rows: {}".format(index, full_index, self.rows))
+
         # Generate data
         X, y = self.__data_generation(self.rows)
 
@@ -96,7 +98,7 @@ class DataSequence(Sequence):
                 try:
                     next(self.reader1)
                 except StopIteration:
-                    print("CSV iteration end. Calling 'break'.")
+                    print("CSV iteration end for feature. Calling 'break'.")
                     break
 
                 array_row2 = np.array(row2, dtype=np.int)
@@ -105,7 +107,7 @@ class DataSequence(Sequence):
                 try:
                     next(self.reader2)
                 except StopIteration:
-                    print("CSV iteration end. Calling 'break'.")
+                    print("CSV iteration end for label. Calling 'break'.")
                     break
 
         return samples, targets
