@@ -107,7 +107,7 @@ def plot_feature_label_prediction(feature_image, label_image, prediction_image,
     plt.close(fig)
 
 def plot_history(history, quantity, plot_title, y_label, plot_name):
-    fig, axes = plt.subplots(1, 1, figsize=(10,15), facecolor='w')
+    fig, axes = plt.subplots(1, 1, figsize=(15,10), facecolor='w')
     axes.plot(history.history[quantity.lower()])
     axes.plot(history.history['val_{}'.format(quantity.lower())])
     axes.set_title(plot_title, fontsize=20,fontname='DejaVu Sans',fontweight='bold')
