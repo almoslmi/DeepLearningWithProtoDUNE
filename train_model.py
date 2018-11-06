@@ -101,7 +101,7 @@ def main():
 
     # Compile the model
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
-    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=32,
+    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=16,
                            dropout=0.01,
                            batchnorm=True)
 
