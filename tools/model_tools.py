@@ -67,16 +67,15 @@ def get_unet_model(input_tensor, num_classes, num_filters=16, dropout=0.05, batc
     model = Model(inputs=[input_tensor], outputs=[outputs])
     return model
 
-def train_model(model, X, y, num_training, num_validation, model_path, num_epochs=5, batch_size=10,
-                early_stop_patience=25, reduce_lr_patience=5, reduce_lr_factor=0.3, reduce_lr_cooldown=5):
+def train_model(model, X, y, num_training, num_validation, model_path, num_epochs=5, batch_size=10):
     # Stop training when a monitored quantity has stopped improving after certain epochs
-    early_stop = EarlyStopping(patience=early_stop_patience, verbose=1)
+    early_stop = EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
 
     # Reduce learning rate when a metric has stopped improving
-    reduce_lr = ReduceLROnPlateau(factor=0.3, reduce_lr_patience=3, cooldown=3, verbose=1)
+    reduce_lr = ReduceLROnPlateau(monitor='val_loss', mode='min', factor=0.5, patience=5, cooldown=3, verbose=1)
 
     # Save the best model after every epoch
-    check_point = ModelCheckpoint(filepath=model_path, verbose=1, save_best_only=True)
+    check_point = ModelCheckpoint(filepath=model_path, verbose=1, save_best_only=True, monitor='val_loss', mode='min')
 
     history = model.fit_generator(X,
                                   steps_per_epoch = num_training//batch_size,

@@ -5,7 +5,7 @@ import numpy as np
 import configparser
 from keras.models import load_model
 from tools.plotting_tools import plot_feature_label_prediction
-from tools.loss_metrics_tools import weighted_categorical_crossentropy, three_classes_mean_iou
+from tools.loss_metrics_tools import weighted_categorical_crossentropy
 from tools.data_tools import DataSequence, get_data_generator, preprocess_feature, preprocess_label
 
 def argument_parser():
@@ -84,8 +84,7 @@ def main():
 
     # Get the model
     model_path = os.path.join("saved_models", "model_and_weights.hdf5")
-    model = load_model(model_path, custom_objects={"loss": weighted_categorical_crossentropy(WEIGHTS),
-                                                   "three_classes_mean_iou": three_classes_mean_iou})
+    model = load_model(model_path, custom_objects={"loss": weighted_categorical_crossentropy(WEIGHTS)})
 
     # Make comparision plots
     generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
@@ -125,6 +124,12 @@ def main():
 
     predictions = model.predict_on_batch(samples)
     average_intersection_over_union(targets, predictions, CLASS_NAMES)
+
+
+    # Print the test accuracy
+    score = model.evaluate(samples, targets, verbose=0)
+    accuracy = 100*score[1]
+    print('\nTest accuracy of the model is: {:.2f}%'.format(accuracy))
 
     print("\nDone!\n")
 

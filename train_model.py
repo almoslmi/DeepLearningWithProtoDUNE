@@ -7,7 +7,7 @@ from keras.optimizers import Adam
 from tools.data_tools import DataSequence
 from tools.plotting_tools import plot_history
 from tools.model_tools import get_unet_model, train_model
-from tools.loss_metrics_tools import weighted_categorical_crossentropy, three_classes_mean_iou
+from tools.loss_metrics_tools import weighted_categorical_crossentropy
 
 # Needed when using single GPU with sbatch; else will get the following error
 # failed call to cuInit: CUDA_ERROR_NO_DEVICE
@@ -101,17 +101,17 @@ def main():
 
     # Compile the model
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
-    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=16,
-                           dropout=0.01,
+    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=8,
+                           dropout=0.2,
                            batchnorm=True)
 
-    model.compile(optimizer=Adam(lr=0.0005),
+    model.compile(optimizer=Adam(lr=0.0001),
                   loss=weighted_categorical_crossentropy(WEIGHTS),
-                  metrics=[three_classes_mean_iou])
+                  metrics=['accuracy'])
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")
     # If weights exist, load them before continuing training
-    continue_training = False
+    continue_training = True
     if(os.path.isfile(model_and_weights) and continue_training):
         print("Old weights found!")
         try:
@@ -130,8 +130,8 @@ def main():
     loss_path = os.path.join("plots", "loss_vs_epoch.pdf")
     plot_history(history, quantity='loss', plot_title='Weighted loss', y_label='Loss', plot_name=loss_path)
 
-    iou_path = os.path.join("plots", "iou_vs_epoch.pdf")
-    plot_history(history, quantity='three_classes_mean_iou', plot_title='Mean IoU', y_label='Mean IoU', plot_name=iou_path)
+    accuracy_path = os.path.join("plots", "accuracy_vs_epoch.pdf")
+    plot_history(history, quantity='acc', plot_title='Accuracy', y_label='Accuracy', plot_name=accuracy_path)
 
 if __name__ == "__main__":
     main()
