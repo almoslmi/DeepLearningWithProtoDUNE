@@ -6,7 +6,7 @@ from keras.layers import Input
 from keras.optimizers import Adam
 from tools.data_tools import DataSequence
 from tools.plotting_tools import plot_history
-from tools.model_tools import get_unet_model, train_model
+from tools.model_tools import get_unet_model, get_fcn_model, train_model
 from tools.loss_metrics_tools import weighted_categorical_crossentropy
 
 # Needed when using single GPU with sbatch; else will get the following error
@@ -101,9 +101,11 @@ def main():
 
     # Compile the model
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
-    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=8,
-                           dropout=0.2,
-                           batchnorm=True)
+    #model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=32,
+    #                       dropout=0.2,
+    #                       batchnorm=True)
+
+    model = get_fcn_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=32)
 
     model.compile(optimizer=Adam(lr=0.0001),
                   loss=weighted_categorical_crossentropy(WEIGHTS),
