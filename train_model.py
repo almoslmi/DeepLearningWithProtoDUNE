@@ -111,7 +111,7 @@ def main():
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")
     # If weights exist, load them before continuing training
-    continue_training = True
+    continue_training = False
     if(os.path.isfile(model_and_weights) and continue_training):
         print("Old weights found!")
         try:
