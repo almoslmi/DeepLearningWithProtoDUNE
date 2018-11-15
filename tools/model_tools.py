@@ -5,6 +5,8 @@ from keras.layers.convolutional import Conv2D, Conv2DTranspose
 from keras.layers import BatchNormalization, Activation, Dense, Dropout
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
 
+from tools.separable_conv2d import SeparableConv2DKeras, BilinearUpSampling2D
+
 def make_conv2d_block(input_tensor, num_filters, kernel_size=3, batchnorm=True):
     # First layer
     x = Conv2D(filters=num_filters, kernel_size=(kernel_size, kernel_size), kernel_initializer="he_normal",
@@ -21,7 +23,7 @@ def make_conv2d_block(input_tensor, num_filters, kernel_size=3, batchnorm=True):
     x = Activation("relu")(x)
     return x
 
-def get_unet_model(input_tensor, num_classes, num_filters=16, dropout=0.05, batchnorm=True):
+def get_unet_model(input_tensor, num_classes, num_filters=32, dropout=0.05, batchnorm=True):
     # Vontracting path
     c1 = make_conv2d_block(input_tensor, num_filters=num_filters*1, kernel_size=3, batchnorm=batchnorm)
     p1 = MaxPooling2D((2, 2)) (c1)
@@ -66,6 +68,59 @@ def get_unet_model(input_tensor, num_classes, num_filters=16, dropout=0.05, batc
 
     model = Model(inputs=[input_tensor], outputs=[outputs])
     return model
+
+
+def separable_conv2d_batchnorm(input_layer, filters, strides=1):
+    output_layer = SeparableConv2DKeras(filters=filters,kernel_size=3, strides=strides,
+                             padding='same', activation='relu')(input_layer)
+
+    output_layer = layers.BatchNormalization()(output_layer)
+    return output_layer
+
+def conv2d_batchnorm(input_layer, filters, kernel_size=3, strides=1):
+    output_layer = layers.Conv2D(filters=filters, kernel_size=kernel_size, strides=strides,
+                      padding='same', activation='relu')(input_layer)
+
+    output_layer = layers.BatchNormalization()(output_layer)
+    return output_layer
+
+def bilinear_upsample(input_layer):
+    output_layer = BilinearUpSampling2D((2,2))(input_layer)
+    return output_layer
+
+def encoder_block(input_layer, filters, strides):
+    output_layer = separable_conv2d_batchnorm(input_layer, filters, strides)
+    return output_layer
+
+def decoder_block(small_ip_layer, large_ip_layer, filters):
+    upsampled_layer = bilinear_upsample(small_ip_layer)
+
+    concatenated_layer = layers.concatenate([upsampled_layer, large_ip_layer])
+
+    output1_layer = separable_conv2d_batchnorm(concatenated_layer, filters)
+    output2_layer = separable_conv2d_batchnorm(output1_layer,      filters)
+
+    return output2_layer
+
+def get_fcn_model(input_tensor, num_classes, num_filters=32):
+    # With each encoder layer, the depth of FCN model (the number of filters) increases.
+    encoder1_layer = encoder_block(inputs, 1*num_filters, strides=2)
+    encoder2_layer = encoder_block(encoder1_layer, 2*num_filters, strides=2)
+    encoder3_layer = encoder_block(encoder2_layer, 3*num_filters, strides=2)
+
+    # Add 1x1 Convolution layer using conv2d_batchnorm().
+    conv_layer = conv2d_batchnorm(encoder3_layer, 4*num_filters, kernel_size=1, strides=1)
+
+    # Add the same number of Decoder Blocks as the number of Encoder Blocks
+    decoder1_layer = decoder_block(conv_layer, encoder2_layer, 3*num_filters)
+    decoder2_layer = decoder_block(decoder1_layer, encoder1_layer, 2*num_filters)
+    x = decoder_block(decoder2_layer, inputs, 1*num_filters)
+
+    outputs = layers.Conv2D(num_classes, 3, activation='softmax', padding='same')(x)
+
+    model = Model(inputs=[input_tensor], outputs=[outputs])
+    return model
+
 
 def train_model(model, X, y, num_training, num_validation, model_path, num_epochs=5, batch_size=10):
     # Stop training when a monitored quantity has stopped improving after certain epochs
