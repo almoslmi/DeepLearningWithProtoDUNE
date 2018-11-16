@@ -7,16 +7,19 @@ def weighted_categorical_crossentropy(weights):
     Use this loss function with median frequency coefficients weights for class balance.
     """
     # Convert weights to a variable instance (with Keras metadata included)
-    weights = K.variable(weights)
+    #weights = K.variable(weights)
+    weights = 0.25
     def loss(y_true, y_pred):
         # Scale predictions so that the class probas of each sample sum to 1
-        y_pred /= K.sum(y_pred, axis=-1, keepdims=True)
+        #y_pred /= K.sum(y_pred, axis=-1, keepdims=True)
 
         # Clip to prevent NaN's and Inf's
-        y_pred = K.clip(y_pred, K.epsilon(), 1 - K.epsilon())
+        y_pred = K.clip(y_pred, K.epsilon(), 1.0 - K.epsilon())
 
         # Do the loss calculation
-        loss = y_true * K.log(y_pred) * weights
+        gamma = 2.0
+        pt = tf.where(tf.equal(y_true, 1), y_pred, 1 - y_pred)
+        loss = weights * K.pow(1.0 - pt, gamma) * K.log(pt)
         loss = -K.sum(loss, axis=-1)
 
         return loss
