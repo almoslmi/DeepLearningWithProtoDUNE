@@ -5,8 +5,8 @@ import numpy as np
 import configparser
 from keras.models import load_model
 from tools.plotting_tools import plot_feature_label_prediction
-from tools.loss_metrics_tools import weighted_categorical_crossentropy
 from tools.data_tools import DataSequence, get_data_generator, preprocess_feature, preprocess_label
+from tools.loss_metrics_tools import weighted_categorical_crossentropy, focal_loss, weighted_focal_loss
 
 def argument_parser():
     ap = argparse.ArgumentParser()
@@ -68,7 +68,7 @@ def main():
     IMAGE_HEIGHT = int(config["DEFAULT"]["IMAGE_HEIGHT"])
     IMAGE_DEPTH = int(config["DEFAULT"]["IMAGE_DEPTH"])
     CLASS_NAMES = config["DEFAULT"]["CLASS_NAMES"].split()
-    WEIGHTS = list(map(float, config["DEFAULT"]["WEIGHTS"].split()))
+    WEIGHTS = np.array(list(map(float, config["DEFAULT"]["WEIGHTS"].split())))
 
     FEATURE_FILE_TESTING = config["DEFAULT"]["FEATURE_FILE_TESTING"]
     LABEL_FILE_TESTING = config["DEFAULT"]["LABEL_FILE_TESTING"]
@@ -84,7 +84,7 @@ def main():
 
     # Get the model
     model_path = os.path.join("saved_models", "model_and_weights.hdf5")
-    model = load_model(model_path, custom_objects={"loss": weighted_categorical_crossentropy(WEIGHTS)})
+    model = load_model(model_path, custom_objects={"loss": focal_loss()})
 
     # Make comparision plots
     generator_testing = get_data_generator(FEATURE_FILE_TESTING, LABEL_FILE_TESTING)
@@ -124,7 +124,6 @@ def main():
 
     predictions = model.predict_on_batch(samples)
     average_intersection_over_union(targets, predictions, CLASS_NAMES)
-
 
     # Print the test accuracy
     score = model.evaluate(samples, targets, verbose=0)
