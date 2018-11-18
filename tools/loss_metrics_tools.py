@@ -4,6 +4,7 @@ from keras import backend as K
 def weighted_categorical_crossentropy(weights):
     """
     Weighted version of keras.objectives.categorical_crossentropy.
+<<<<<<< HEAD
     Use this loss function with median frequency weights for class balance.
     """
     # Convert weights to a constant tensor
@@ -70,6 +71,33 @@ def weighted_focal_loss(weights, gamma=2.0):
 # For Keras, custom metrics can be passed at the compilation step but
 # the function would need to take (y_true, y_pred) as arguments and return a single tensor value.
 # Note: seems like this implementation is not stable; it sometimes returns 0 in standalone tests
+=======
+    Use this loss function with median frequency coefficients weights for class balance.
+    """
+    # Convert weights to a variable instance (with Keras metadata included)
+    #weights = K.variable(weights)
+    weights = 0.25
+    def loss(y_true, y_pred):
+        # Scale predictions so that the class probas of each sample sum to 1
+        #y_pred /= K.sum(y_pred, axis=-1, keepdims=True)
+
+        # Clip to prevent NaN's and Inf's
+        y_pred = K.clip(y_pred, K.epsilon(), 1.0 - K.epsilon())
+
+        # Do the loss calculation
+        gamma = 2.0
+        pt = tf.where(tf.equal(y_true, 1), y_pred, 1 - y_pred)
+        loss = weights * K.pow(1.0 - pt, gamma) * K.log(pt)
+        loss = -K.sum(loss, axis=-1)
+
+        return loss
+
+    return loss
+
+
+# For Keras, custom metrics can be passed at the compilation step but
+# the function would need to take (y_true, y_pred) as arguments and return a single tensor value.
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
 def three_classes_mean_iou(y_true, y_pred):
     """
     Calculate per-step mean Intersection-Over-Union (mIOU).
@@ -81,3 +109,18 @@ def three_classes_mean_iou(y_true, y_pred):
     with tf.control_dependencies([up_opt]):
         score = tf.identity(score)
     return score
+<<<<<<< HEAD
+=======
+
+def four_classes_mean_iou(y_true, y_pred):
+    """
+    Calculate per-step mean Intersection-Over-Union (mIOU).
+    Computes the IOU for each semantic class and then computes the average over classes.
+    """
+    num_classes = 4
+    score, up_opt = tf.metrics.mean_iou(y_true, y_pred, num_classes)
+    K.get_session().run(tf.local_variables_initializer())
+    with tf.control_dependencies([up_opt]):
+        score = tf.identity(score)
+    return score
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2

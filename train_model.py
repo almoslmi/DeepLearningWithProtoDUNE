@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+<<<<<<< HEAD
 import numpy as np
 import configparser
 from keras.layers import Input
@@ -9,6 +10,15 @@ from tools.data_tools import DataSequence
 from tools.plotting_tools import plot_history
 from tools.model_tools import get_unet_model, train_model
 from tools.loss_metrics_tools import weighted_categorical_crossentropy, focal_loss, weighted_focal_loss
+=======
+import configparser
+from keras.layers import Input
+from keras.optimizers import Adam
+from tools.data_tools import DataSequence
+from tools.plotting_tools import plot_history
+from tools.model_tools import get_unet_model, train_model
+from tools.loss_metrics_tools import weighted_categorical_crossentropy
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
 
 # Needed when using single GPU with sbatch; else will get the following error
 # failed call to cuInit: CUDA_ERROR_NO_DEVICE
@@ -65,7 +75,11 @@ def main():
     LABEL_FILE_TRAINING = config["DEFAULT"]["LABEL_FILE_TRAINING"]
     FEATURE_FILE_VALIDATION = config["DEFAULT"]["FEATURE_FILE_VALIDATION"]
     LABEL_FILE_VALIDATION = config["DEFAULT"]["LABEL_FILE_VALIDATION"]
+<<<<<<< HEAD
     WEIGHTS = np.array(list(map(float, config["DEFAULT"]["WEIGHTS"].split())))
+=======
+    WEIGHTS = list(map(float, config["DEFAULT"]["WEIGHTS"].split()))
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
 
     print("NUM_TRAINING: {}".format(NUM_TRAINING))
     print("NUM_VALIDATION: {}".format(NUM_VALIDATION))
@@ -100,6 +114,7 @@ def main():
                                            max_index=NUM_VALIDATION,
                                            batch_size=BATCH_SIZE)
 
+<<<<<<< HEAD
     # Note: num_filters needs to be 16 or less for batch size of 5 (for 6 GB memory)
 
     # Compile the model
@@ -111,6 +126,17 @@ def main():
 
     model.compile(optimizer=SGD(lr=1e-5, decay=1e-3, momentum=0.9, nesterov=True),
                   loss=focal_loss(),
+=======
+    # Compile the model
+    input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
+    # Note: num_filters needs to be 16 or less for batch size of 5 (for 6 GB memory)
+    model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=16,
+                           dropout=0.2,
+                           batchnorm=True)
+
+    model.compile(optimizer=Adam(lr=0.0001),
+                  loss=weighted_categorical_crossentropy(WEIGHTS),
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
                   metrics=['accuracy'])
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")

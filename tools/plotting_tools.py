@@ -19,7 +19,11 @@ def plot_weights_median(weights, ranges, class_names, plot_name):
         _, max_ = ax.get_ylim()
         median = np.median(weights[index])
         ax.axvline(median, color='k', linestyle='dashed', linewidth=2)
+<<<<<<< HEAD
         ax.text(median + median/5, max_ - max_/5, 'Median: {:.3f}'.format(median),
+=======
+        ax.text(median + median/10, max_ - max_/10, 'Median: {:.2f}'.format(median),
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
                 fontsize=12, fontweight=1000, color='k')
 
     fig.savefig(plot_name, bbox_inches='tight')
@@ -33,7 +37,11 @@ def get_feature_image(feature_image, fig, ax, title):
                   norm=LogNorm(vmin=1.0, vmax=abs(feature_image).max()))
     fig.colorbar(c, ax=ax)
     ax.set_xlabel("Global wire no.", fontsize=15, fontname='DejaVu Sans',fontweight='bold')
+<<<<<<< HEAD
     ax.set_ylabel("TDC", fontsize=15, fontname='DejaVu Sans',fontweight='bold')
+=======
+    ax.set_ylabel("TDC", fontsize=1, fontname='DejaVu Sans',fontweight='bold')
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
     ax.set_title(title, fontsize=20,fontname='DejaVu Sans',fontweight='bold')
 
 def get_label_image(label_image, class_names, fig, ax, title):
@@ -78,7 +86,11 @@ def plot_categories(feature_image, label_image, class_names, plot_name):
         c = ax.imshow(feature_image*mask, cmap='winter_r',interpolation='none', origin='lower',
                   norm=LogNorm(vmin=1.0, vmax=np.max(feature_image)))
         ax.set_xlabel("Global wire no.", fontsize=15, fontname='DejaVu Sans',fontweight='bold')
+<<<<<<< HEAD
         ax.set_ylabel("TDC", fontsize=15, fontname='DejaVu Sans',fontweight='bold')
+=======
+        ax.set_ylabel("TDC", fontsize=1, fontname='DejaVu Sans',fontweight='bold')
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
         ax.set_title(class_names[index], fontsize=20,fontname='DejaVu Sans',fontweight='bold')
 
     fig.savefig(plot_name, bbox_inches='tight')
@@ -97,7 +109,11 @@ def plot_feature_label_prediction(feature_image, label_image, prediction_image,
                    norm=LogNorm(vmin=1E-3, vmax=1.0))
     fig.colorbar(c, ax=ax0)
     ax0.set_xlabel("Global wire no.", fontsize=15, fontname='DejaVu Sans',fontweight='bold')
+<<<<<<< HEAD
     ax0.set_ylabel("TDC", fontsize=15, fontname='DejaVu Sans',fontweight='bold')
+=======
+    ax0.set_ylabel("TDC", fontsize=1, fontname='DejaVu Sans',fontweight='bold')
+>>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
     ax0.set_title(feature_title, fontsize=20,fontname='DejaVu Sans',fontweight='bold')
 
     get_label_image(label_image, class_names, fig, ax1, label_title)
