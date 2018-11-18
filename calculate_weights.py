@@ -7,24 +7,13 @@ from tools.plotting_tools import plot_weights_median
 
 def get_class_weights(y):
     """
-<<<<<<< HEAD
     Returns the weights for each class based on the frequencies of the samplesself.
     For 3 classes with classA:10%, classB:50% and classC:40%, weights will be: {0:1, 1:0.2, 2:0.25}
-=======
-    Returns the weights for each class based on the frequencies of the samples
-    For 3 classes with classA:10%, classB:50% and classC:40%, weights will be: {0:5, 1:1, 2:1.25}
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
     The loss will be 5x more for miss-classifying classA than for classB and so on...
     """
     counter = Counter(y)
-
-<<<<<<< HEAD
     minority = min(counter.values())
     return {cls: float(minority) / float(count) for cls, count in counter.items()}
-=======
-    majority = max(counter.values())
-    return {cls: float(majority) / count for cls, count in counter.items()}
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
 
 def main():
     config = configparser.ConfigParser()
@@ -48,11 +37,8 @@ def main():
         for index, weight in class_weights.items():
             weights[index].append(weight)
 
-<<<<<<< HEAD
     ranges = [(0,0.04), (0,0.4), (0.8, 1.2)]
-=======
-    ranges = [(0,2), (0,50), (0, 1700)]
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
+
     plot_path = os.path.join("plots", "weights_median.pdf")
     plot_weights_median(weights, ranges, CLASS_NAMES, plot_path)
     print("\nDone! Plot with median weights for each class is saved at {}!\n".format(plot_path))

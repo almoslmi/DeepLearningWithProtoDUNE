@@ -21,11 +21,7 @@ def make_conv2d_block(input_tensor, num_filters, kernel_size=3, batchnorm=True):
     x = Activation("relu")(x)
     return x
 
-<<<<<<< HEAD
 def get_unet_model(input_tensor, num_classes, num_filters=64, dropout=0.05, batchnorm=True):
-=======
-def get_unet_model(input_tensor, num_classes, num_filters=32, dropout=0.05, batchnorm=True):
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
     # Vontracting path
     c1 = make_conv2d_block(input_tensor, num_filters=num_filters*1, kernel_size=3, batchnorm=batchnorm)
     p1 = MaxPooling2D((2, 2)) (c1)
@@ -71,20 +67,12 @@ def get_unet_model(input_tensor, num_classes, num_filters=32, dropout=0.05, batc
     model = Model(inputs=[input_tensor], outputs=[outputs])
     return model
 
-<<<<<<< HEAD
 def train_model(model, X, y, num_training, num_validation, model_path, num_epochs=1, batch_size=1):
-=======
-def train_model(model, X, y, num_training, num_validation, model_path, num_epochs=5, batch_size=10):
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
     # Stop training when a monitored quantity has stopped improving after certain epochs
     early_stop = EarlyStopping(monitor='val_loss', mode='min', patience=50, verbose=1)
 
     # Reduce learning rate when a metric has stopped improving
-<<<<<<< HEAD
     reduce_lr = ReduceLROnPlateau(monitor='val_loss', mode='min', factor=0.25, patience=2, cooldown=0, verbose=1)
-=======
-    reduce_lr = ReduceLROnPlateau(monitor='val_loss', mode='min', factor=0.5, patience=5, cooldown=3, verbose=1)
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2
 
     # Save the best model after every epoch
     check_point = ModelCheckpoint(filepath=model_path, verbose=1, save_best_only=True, monitor='val_loss', mode='min')
