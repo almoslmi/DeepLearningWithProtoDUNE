@@ -3,11 +3,7 @@
 # Except this file
 !.gitignore
 !*_1.pdf
-<<<<<<< HEAD
-!*_2.pdf
-=======
 !*_2.pdf
 !*_3.pdf
 !*_4.pdf
 !*_5.pdf
->>>>>>> e9ae1feff52800aefd36d6cf5f6b7471cd0813f2

@@ -1,0 +1,12 @@
+2018-11-19 08:55:00.156380: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+name: Tesla K20Xm major: 3 minor: 5 memoryClockRate(GHz): 0.732
+pciBusID: 0000:08:00.0
+totalMemory: 5.57GiB freeMemory: 5.49GiB
+2018-11-19 08:55:00.156448: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2018-11-19 08:55:00.559429: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-11-19 08:55:00.559489: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2018-11-19 08:55:00.559500: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2018-11-19 08:55:00.559760: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5278 MB memory) -> physical GPU (device: 0, name: Tesla K20Xm, pci bus id: 0000:08:00.0, compute capability: 3.5)
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 5033 ON node01 CANCELLED AT 2018-11-19T08:55:57 ***
+slurmstepd: error: *** STEP 5033.0 ON node01 CANCELLED AT 2018-11-19T08:55:57 ***

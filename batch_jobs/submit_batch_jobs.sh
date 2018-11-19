@@ -21,18 +21,28 @@
 ##SBATCH --mail-type=FAIL
 ##SBATCH --mail-user arbint@bnl.gov
 
-## Print time and date and hostname
-echo "JOB $SLURM_JOB_ID is running on $SLURM_JOB_NODELIST "
-echo "Date:"
+echo ""
+echo "*********************************************************"
+echo "This was run on:"
 date
-echo "Hostname:"
-hostname
-
+echo "*********************************************************"
+echo ""
 ## Load cuda module for GPU job
 module load anaconda2
 module load cuda
 source activate envDeepLearningWithProtoDUNE
-
-echo "Running python train_model.py"
 cd ../
+
+echo "*********************************************************"
+echo "Running python train_model.py"
+echo "JOB $SLURM_JOB_ID is running on $SLURM_JOB_NODELIST "
+echo "*********************************************************"
+echo ""
 srun python train_model.py -o Training -e Default
+
+echo "*********************************************************"
+echo "Running python analyze_model.py"
+echo "JOB $SLURM_JOB_ID is running on $SLURM_JOB_NODELIST "
+echo "*********************************************************"
+echo ""
+srun python analyze_model.py -p 5 -s Development
