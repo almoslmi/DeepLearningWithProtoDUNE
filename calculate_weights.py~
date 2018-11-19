@@ -12,7 +12,6 @@ def get_class_weights(y):
     The loss will be 5x more for miss-classifying classA than for classB and so on...
     """
     counter = Counter(y)
-
     minority = min(counter.values())
     return {cls: float(minority) / float(count) for cls, count in counter.items()}
 
