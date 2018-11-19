@@ -107,7 +107,7 @@ def main():
 
     model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=64,
                            dropout=0.05,
-                           batchnorm=True)
+                           batchnorm=False)
 
     model.compile(optimizer=SGD(lr=1e-5, decay=1e-3, momentum=0.9, nesterov=True),
                   loss=focal_loss(),
