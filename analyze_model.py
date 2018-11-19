@@ -21,7 +21,7 @@ def intersection_over_union(y_true, y_pred, epsilon=1e-6):
     intersection = np.sum(y_true * y_pred)
     union = np.sum(y_true + y_pred)
 
-    return 2. * (intersection + epsilon)/(union + epsilon)
+    return (2.0 * (intersection + epsilon)/(union + epsilon))
 
 def average_intersection_over_union(y_true, y_pred, class_names):
     """
