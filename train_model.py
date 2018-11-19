@@ -110,7 +110,7 @@ def main():
                            batchnorm=True)
 
     model.compile(optimizer=SGD(lr=1e-5, decay=1e-3, momentum=0.9, nesterov=True),
-                  loss=focal_loss(),
+                  loss=weighted_categorical_crossentropy(WEIGHTS),
                   metrics=['accuracy'])
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")
