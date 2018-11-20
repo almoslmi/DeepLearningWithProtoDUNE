@@ -109,7 +109,8 @@ def main():
                            dropout=0.05,
                            batchnorm=True)
 
-    model.compile(optimizer=SGD(lr=1e-5, decay=1e-3, momentum=0.9, nesterov=True),
+    #model.compile(optimizer=SGD(lr=1e-5, decay=1e-3, momentum=0.9, nesterov=True),
+    model.compile(optimizer=SGD(lr=1e-5, momentum=0.9, nesterov=True),
                   loss=focal_loss(),
                   metrics=['accuracy'])
 
