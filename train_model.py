@@ -132,7 +132,7 @@ def main():
 
     # Plot the history
     loss_path = os.path.join("plots", "loss_vs_epoch.pdf")
-    plot_history(history, quantity='loss', plot_title='Weighted loss', y_label='Loss', plot_name=loss_path)
+    plot_history(history, quantity='loss', plot_title='Loss', y_label='Loss', plot_name=loss_path)
 
     accuracy_path = os.path.join("plots", "accuracy_vs_epoch.pdf")
     plot_history(history, quantity='acc', plot_title='Accuracy', y_label='Accuracy', plot_name=accuracy_path)
