@@ -48,9 +48,10 @@ def weighted_focal_loss(weights, gamma=2.0):
     weights: Median frequency weights for class balance
     gamma: Take the power of the focal weight with gamma.
     """
+    # Convert weights to a constant tensor
+    weights = tf.constant(weights, dtype=tf.float32)
+
     def loss(y_true, y_pred):
-        # Convert weights to a constant tensor
-        weights = tf.constant(weights, dtype=tf.float32)
         alpha=1.0/weights
 
         # Scale predictions so that the class probas of each sample sum to 1
