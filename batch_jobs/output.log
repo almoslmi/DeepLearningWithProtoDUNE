@@ -1,11 +1,360 @@
 
 *********************************************************
 This was run on:
-Mon Nov 19 08:54:54 EST 2018
+Mon Nov 19 10:26:35 EST 2018
 *********************************************************
 
 *********************************************************
 Running python train_model.py
-JOB 5033 is running on node01 
+JOB 5039 is running on node06 
 *********************************************************
+
+
+Reading info from configuration:
+
+Runnning in training setting!
+
+NUM_TRAINING: 7815
+NUM_VALIDATION: 1019
+NUM_EPOCHS: 50
+BATCH_SIZE: 2
+IMAGE_WIDTH: 224
+IMAGE_HEIGHT: 224
+IMAGE_DEPTH: 1
+CLASS_NAMES: ['Background', 'Cosmic', 'Beam']
+FEATURE_FILE_TRAINING: /scratch/arbint/input_files/training/feature_w.csv
+LABEL_FILE_TRAINING: /scratch/arbint/input_files/training/label_w.csv
+FEATURE_FILE_VALIDATION: /scratch/arbint/input_files/validation/feature_w.csv
+LABEL_FILE_VALIDATION: /scratch/arbint/input_files/validation/label_w.csv
+WEIGHTS: [0.007 0.07  1.   ]
+
+Epoch 1/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1820s - loss: 0.0162 - acc: 0.6234 - val_loss: 0.9712 - val_acc: 0.6784
+
+Epoch 00001: val_loss improved from inf to 0.97124, saving model to saved_models/model_and_weights.hdf5
+Epoch 2/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0151 - acc: 0.6254 - val_loss: 0.9500 - val_acc: 0.6790
+
+Epoch 00002: val_loss improved from 0.97124 to 0.94995, saving model to saved_models/model_and_weights.hdf5
+Epoch 3/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0149 - acc: 0.6267 - val_loss: 0.9381 - val_acc: 0.6784
+
+Epoch 00003: val_loss improved from 0.94995 to 0.93814, saving model to saved_models/model_and_weights.hdf5
+Epoch 4/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1800s - loss: 0.0148 - acc: 0.6274 - val_loss: 0.9302 - val_acc: 0.6785
+
+Epoch 00004: val_loss improved from 0.93814 to 0.93018, saving model to saved_models/model_and_weights.hdf5
+Epoch 5/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0147 - acc: 0.6279 - val_loss: 0.9243 - val_acc: 0.6787
+
+Epoch 00005: val_loss improved from 0.93018 to 0.92435, saving model to saved_models/model_and_weights.hdf5
+Epoch 6/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0147 - acc: 0.6285 - val_loss: 0.9185 - val_acc: 0.6781
+
+Epoch 00006: val_loss improved from 0.92435 to 0.91854, saving model to saved_models/model_and_weights.hdf5
+Epoch 7/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0146 - acc: 0.6289 - val_loss: 0.9126 - val_acc: 0.6781
+
+Epoch 00007: val_loss improved from 0.91854 to 0.91263, saving model to saved_models/model_and_weights.hdf5
+Epoch 8/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0146 - acc: 0.6293 - val_loss: 0.9103 - val_acc: 0.6780
+
+Epoch 00008: val_loss improved from 0.91263 to 0.91031, saving model to saved_models/model_and_weights.hdf5
+Epoch 9/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1804s - loss: 0.0146 - acc: 0.6296 - val_loss: 0.9067 - val_acc: 0.6786
+
+Epoch 00009: val_loss improved from 0.91031 to 0.90673, saving model to saved_models/model_and_weights.hdf5
+Epoch 10/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0146 - acc: 0.6299 - val_loss: 0.9047 - val_acc: 0.6787
+
+Epoch 00010: val_loss improved from 0.90673 to 0.90466, saving model to saved_models/model_and_weights.hdf5
+Epoch 11/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1803s - loss: 0.0145 - acc: 0.6302 - val_loss: 0.9018 - val_acc: 0.6787
+
+Epoch 00011: val_loss improved from 0.90466 to 0.90183, saving model to saved_models/model_and_weights.hdf5
+Epoch 12/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0145 - acc: 0.6304 - val_loss: 0.8993 - val_acc: 0.6789
+
+Epoch 00012: val_loss improved from 0.90183 to 0.89927, saving model to saved_models/model_and_weights.hdf5
+Epoch 13/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0145 - acc: 0.6306 - val_loss: 0.8980 - val_acc: 0.6780
+
+Epoch 00013: val_loss improved from 0.89927 to 0.89798, saving model to saved_models/model_and_weights.hdf5
+Epoch 14/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1800s - loss: 0.0145 - acc: 0.6308 - val_loss: 0.8955 - val_acc: 0.6784
+
+Epoch 00014: val_loss improved from 0.89798 to 0.89552, saving model to saved_models/model_and_weights.hdf5
+Epoch 15/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0145 - acc: 0.6310 - val_loss: 0.8943 - val_acc: 0.6787
+
+Epoch 00015: val_loss improved from 0.89552 to 0.89427, saving model to saved_models/model_and_weights.hdf5
+Epoch 16/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6312 - val_loss: 0.8924 - val_acc: 0.6787
+
+Epoch 00016: val_loss improved from 0.89427 to 0.89243, saving model to saved_models/model_and_weights.hdf5
+Epoch 17/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6314 - val_loss: 0.8914 - val_acc: 0.6789
+
+Epoch 00017: val_loss improved from 0.89243 to 0.89141, saving model to saved_models/model_and_weights.hdf5
+Epoch 18/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6315 - val_loss: 0.8904 - val_acc: 0.6789
+
+Epoch 00018: val_loss improved from 0.89141 to 0.89037, saving model to saved_models/model_and_weights.hdf5
+Epoch 19/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1803s - loss: 0.0144 - acc: 0.6317 - val_loss: 0.8878 - val_acc: 0.6789
+
+Epoch 00019: val_loss improved from 0.89037 to 0.88782, saving model to saved_models/model_and_weights.hdf5
+Epoch 20/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6317 - val_loss: 0.8876 - val_acc: 0.6791
+
+Epoch 00020: val_loss improved from 0.88782 to 0.88762, saving model to saved_models/model_and_weights.hdf5
+Epoch 21/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6319 - val_loss: 0.8848 - val_acc: 0.6796
+
+Epoch 00021: val_loss improved from 0.88762 to 0.88482, saving model to saved_models/model_and_weights.hdf5
+Epoch 22/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0144 - acc: 0.6321 - val_loss: 0.8840 - val_acc: 0.6792
+
+Epoch 00022: val_loss improved from 0.88482 to 0.88396, saving model to saved_models/model_and_weights.hdf5
+Epoch 23/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6322 - val_loss: 0.8829 - val_acc: 0.6790
+
+Epoch 00023: val_loss improved from 0.88396 to 0.88295, saving model to saved_models/model_and_weights.hdf5
+Epoch 24/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0144 - acc: 0.6323 - val_loss: 0.8820 - val_acc: 0.6791
+
+Epoch 00024: val_loss improved from 0.88295 to 0.88196, saving model to saved_models/model_and_weights.hdf5
+Epoch 25/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6324 - val_loss: 0.8809 - val_acc: 0.6790
+
+Epoch 00025: val_loss improved from 0.88196 to 0.88088, saving model to saved_models/model_and_weights.hdf5
+Epoch 26/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0143 - acc: 0.6325 - val_loss: 0.8799 - val_acc: 0.6790
+
+Epoch 00026: val_loss improved from 0.88088 to 0.87995, saving model to saved_models/model_and_weights.hdf5
+Epoch 27/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0143 - acc: 0.6326 - val_loss: 0.8790 - val_acc: 0.6793
+
+Epoch 00027: val_loss improved from 0.87995 to 0.87897, saving model to saved_models/model_and_weights.hdf5
+Epoch 28/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0143 - acc: 0.6327 - val_loss: 0.8772 - val_acc: 0.6797
+
+Epoch 00028: val_loss improved from 0.87897 to 0.87721, saving model to saved_models/model_and_weights.hdf5
+Epoch 29/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0143 - acc: 0.6328 - val_loss: 0.8771 - val_acc: 0.6796
+
+Epoch 00029: val_loss improved from 0.87721 to 0.87712, saving model to saved_models/model_and_weights.hdf5
+Epoch 30/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6329 - val_loss: 0.8762 - val_acc: 0.6792
+
+Epoch 00030: val_loss improved from 0.87712 to 0.87625, saving model to saved_models/model_and_weights.hdf5
+Epoch 31/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0143 - acc: 0.6330 - val_loss: 0.8754 - val_acc: 0.6799
+
+Epoch 00031: val_loss improved from 0.87625 to 0.87540, saving model to saved_models/model_and_weights.hdf5
+Epoch 32/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6331 - val_loss: 0.8737 - val_acc: 0.6799
+
+Epoch 00032: val_loss improved from 0.87540 to 0.87374, saving model to saved_models/model_and_weights.hdf5
+Epoch 33/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1803s - loss: 0.0143 - acc: 0.6332 - val_loss: 0.8731 - val_acc: 0.6797
+
+Epoch 00033: val_loss improved from 0.87374 to 0.87310, saving model to saved_models/model_and_weights.hdf5
+Epoch 34/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6332 - val_loss: 0.8729 - val_acc: 0.6797
+
+Epoch 00034: val_loss improved from 0.87310 to 0.87293, saving model to saved_models/model_and_weights.hdf5
+Epoch 35/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0143 - acc: 0.6333 - val_loss: 0.8723 - val_acc: 0.6793
+
+Epoch 00035: val_loss improved from 0.87293 to 0.87228, saving model to saved_models/model_and_weights.hdf5
+Epoch 36/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6334 - val_loss: 0.8718 - val_acc: 0.6795
+
+Epoch 00036: val_loss improved from 0.87228 to 0.87182, saving model to saved_models/model_and_weights.hdf5
+Epoch 37/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1803s - loss: 0.0143 - acc: 0.6335 - val_loss: 0.8701 - val_acc: 0.6793
+
+Epoch 00037: val_loss improved from 0.87182 to 0.87010, saving model to saved_models/model_and_weights.hdf5
+Epoch 38/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6336 - val_loss: 0.8694 - val_acc: 0.6802
+
+Epoch 00038: val_loss improved from 0.87010 to 0.86938, saving model to saved_models/model_and_weights.hdf5
+Epoch 39/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6336 - val_loss: 0.8689 - val_acc: 0.6796
+
+Epoch 00039: val_loss improved from 0.86938 to 0.86889, saving model to saved_models/model_and_weights.hdf5
+Epoch 40/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6337 - val_loss: 0.8685 - val_acc: 0.6797
+
+Epoch 00040: val_loss improved from 0.86889 to 0.86854, saving model to saved_models/model_and_weights.hdf5
+Epoch 41/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0142 - acc: 0.6338 - val_loss: 0.8673 - val_acc: 0.6800
+
+Epoch 00041: val_loss improved from 0.86854 to 0.86734, saving model to saved_models/model_and_weights.hdf5
+Epoch 42/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6339 - val_loss: 0.8674 - val_acc: 0.6804
+
+Epoch 00042: val_loss did not improve from 0.86734
+Epoch 43/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6339 - val_loss: 0.8670 - val_acc: 0.6798
+
+Epoch 00043: val_loss improved from 0.86734 to 0.86700, saving model to saved_models/model_and_weights.hdf5
+Epoch 44/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0143 - acc: 0.6340 - val_loss: 0.8658 - val_acc: 0.6802
+
+Epoch 00044: val_loss improved from 0.86700 to 0.86580, saving model to saved_models/model_and_weights.hdf5
+Epoch 45/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0142 - acc: 0.6340 - val_loss: 0.8657 - val_acc: 0.6798
+
+Epoch 00045: val_loss improved from 0.86580 to 0.86567, saving model to saved_models/model_and_weights.hdf5
+Epoch 46/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1803s - loss: 0.0143 - acc: 0.6341 - val_loss: 0.8656 - val_acc: 0.6801
+
+Epoch 00046: val_loss improved from 0.86567 to 0.86558, saving model to saved_models/model_and_weights.hdf5
+Epoch 47/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6341 - val_loss: 0.8651 - val_acc: 0.6797
+
+Epoch 00047: val_loss improved from 0.86558 to 0.86513, saving model to saved_models/model_and_weights.hdf5
+Epoch 48/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6342 - val_loss: 0.8642 - val_acc: 0.6806
+
+Epoch 00048: val_loss improved from 0.86513 to 0.86421, saving model to saved_models/model_and_weights.hdf5
+Epoch 49/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1801s - loss: 0.0142 - acc: 0.6343 - val_loss: 0.8636 - val_acc: 0.6803
+
+Epoch 00049: val_loss improved from 0.86421 to 0.86364, saving model to saved_models/model_and_weights.hdf5
+Epoch 50/50
+CSV iteration end for feature. Calling 'break'.
+CSV iteration end for feature. Calling 'break'.
+ - 1802s - loss: 0.0142 - acc: 0.6343 - val_loss: 0.8630 - val_acc: 0.6806
+
+Epoch 00050: val_loss improved from 0.86364 to 0.86296, saving model to saved_models/model_and_weights.hdf5
+*********************************************************
+Running python analyze_model.py
+JOB 5039 is running on node06 
+*********************************************************
+
+
+Running over 5 testing events to generate plots.
+
+Reading info from configuration:
+Running over 25 testing events to calculate statistics.
+
+IMAGE_WIDTH: 224
+IMAGE_HEIGHT: 224
+IMAGE_DEPTH: 1
+CLASS_NAMES: ['Background', 'Cosmic', 'Beam']
+FEATURE_FILE_TESTING: /scratch/arbint/input_files/testing/feature_w.csv
+LABEL_FILE_TESTING: /scratch/arbint/input_files/testing/label_w.csv
+WEIGHTS: [0.007 0.07  1.   ]
+
+
+Number of validation samples IoU evaulated on: 25
+IoU for Background is: 0.712
+IoU for Cosmic is: 0.126
+IoU for Beam is: 0.013
+Average IoU is: 0.283
+
+Test accuracy of the model is: 55.02%
+
+Done!
 
