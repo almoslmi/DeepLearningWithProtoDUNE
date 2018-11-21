@@ -106,10 +106,10 @@ def main():
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
 
     model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=64,
-                           dropout=0.05,
+                           dropout=0.2,
                            batchnorm=True)
 
-    model.compile(optimizer=SGD(lr=1e-5, decay=0.0),
+    model.compile(optimizer=SGD(lr=1e-5, decay=1e-5),
                   loss=focal_loss(),
                   metrics=['accuracy'])
 
