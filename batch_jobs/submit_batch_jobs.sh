@@ -11,7 +11,7 @@
 
 ## Specify requested time
 ## day-hr
-#SBATCH -t 5-00:00:00
+#SBATCH -t 7-00:00:00
 
 ## Specify stdout, stderr log; default is slurm-jobid.out
 #SBATCH -o output.log
