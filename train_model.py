@@ -114,6 +114,7 @@ def main():
                   metrics=['accuracy'])
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")
+
     # If weights exist, load them before continuing training
     continue_training = False
     if(os.path.isfile(model_and_weights) and continue_training):
