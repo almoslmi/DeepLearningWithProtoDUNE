@@ -1,90 +1,11 @@
 
 *********************************************************
 This was run on:
-Wed Nov 21 07:04:15 EST 2018
+Wed Nov 21 09:34:12 EST 2018
 *********************************************************
 
 *********************************************************
 Running python train_model.py
-JOB 5056 is running on node01 
+JOB 5060 is running on node02 
 *********************************************************
-
-
-Reading info from configuration:
-
-Runnning in training setting!
-
-NUM_TRAINING: 7815
-NUM_VALIDATION: 1019
-NUM_EPOCHS: 5
-BATCH_SIZE: 2
-IMAGE_WIDTH: 224
-IMAGE_HEIGHT: 224
-IMAGE_DEPTH: 1
-CLASS_NAMES: ['Background', 'Cosmic', 'Beam']
-FEATURE_FILE_TRAINING: /scratch/arbint/input_files/training/feature_w.csv
-LABEL_FILE_TRAINING: /scratch/arbint/input_files/training/label_w.csv
-FEATURE_FILE_VALIDATION: /scratch/arbint/input_files/validation/feature_w.csv
-LABEL_FILE_VALIDATION: /scratch/arbint/input_files/validation/label_w.csv
-WEIGHTS: [0.007 0.07  1.   ]
-
-Epoch 1/5
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1712s - loss: 0.0810 - acc: 0.4511 - val_loss: 0.0796 - val_acc: 0.4392
-
-Epoch 00001: val_loss improved from inf to 0.07962, saving model to saved_models/model_and_weights.hdf5
-Epoch 2/5
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1695s - loss: 0.0679 - acc: 0.4258 - val_loss: 0.0690 - val_acc: 0.4201
-
-Epoch 00002: val_loss improved from 0.07962 to 0.06903, saving model to saved_models/model_and_weights.hdf5
-Epoch 3/5
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1695s - loss: 0.0599 - acc: 0.4109 - val_loss: 0.0632 - val_acc: 0.4084
-
-Epoch 00003: val_loss improved from 0.06903 to 0.06321, saving model to saved_models/model_and_weights.hdf5
-Epoch 4/5
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1696s - loss: 0.0556 - acc: 0.4036 - val_loss: 0.0599 - val_acc: 0.4022
-
-Epoch 00004: val_loss improved from 0.06321 to 0.05988, saving model to saved_models/model_and_weights.hdf5
-Epoch 5/5
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1697s - loss: 0.0530 - acc: 0.3998 - val_loss: 0.0576 - val_acc: 0.3998
-
-Epoch 00005: val_loss improved from 0.05988 to 0.05763, saving model to saved_models/model_and_weights.hdf5
-*********************************************************
-Running python analyze_model.py
-JOB 5056 is running on node01 
-*********************************************************
-
-
-Running over 5 testing events to generate plots.
-
-Reading info from configuration:
-Running over 25 testing events to calculate statistics.
-
-IMAGE_WIDTH: 224
-IMAGE_HEIGHT: 224
-IMAGE_DEPTH: 1
-CLASS_NAMES: ['Background', 'Cosmic', 'Beam']
-FEATURE_FILE_TESTING: /scratch/arbint/input_files/testing/feature_w.csv
-LABEL_FILE_TESTING: /scratch/arbint/input_files/testing/label_w.csv
-WEIGHTS: [0.007 0.07  1.   ]
-
-
-Number of validation samples IoU evaulated on: 25
-IoU for Background is: 0.370
-IoU for Cosmic is: 0.089
-IoU for Beam is: 0.014
-Average IoU is: 0.158
-
-Test accuracy of the model is: 22.48%
-
-Done!
 
