@@ -1,12 +1,12 @@
 
 *********************************************************
 This was run on:
-Tue Nov 27 15:52:25 EST 2018
+Tue Nov 27 19:53:55 EST 2018
 *********************************************************
 
 *********************************************************
 Running python train_model.py
-JOB 5141 is running on node01 
+JOB 5146 is running on node01 
 *********************************************************
 
 
@@ -16,7 +16,7 @@ Runnning in training setting!
 
 NUM_TRAINING: 3626
 NUM_VALIDATION: 514
-NUM_EPOCHS: 15
+NUM_EPOCHS: 30
 BATCH_SIZE: 2
 IMAGE_WIDTH: 224
 IMAGE_HEIGHT: 224
@@ -28,83 +28,159 @@ FEATURE_FILE_VALIDATION: /scratch/arbint/input_files/validation/feature_w.csv
 LABEL_FILE_VALIDATION: /scratch/arbint/input_files/validation/label_w.csv
 WEIGHTS: [0.007 0.07  1.   ]
 
-Epoch 1/15
- - 839s - loss: 3.2918e-04 - acc: 0.4314 - val_loss: 0.0108 - val_acc: 0.2865
+Old weights found!
+Old weights loaded successfully!
+Epoch 1/30
+ - 841s - loss: 3.2941e-04 - acc: 0.4313 - val_loss: 0.0109 - val_acc: 0.2796
 
-Epoch 00001: val_loss improved from inf to 0.01082, saving model to saved_models/model_and_weights.hdf5
-Epoch 2/15
- - 791s - loss: 3.2728e-04 - acc: 0.4312 - val_loss: 0.0109 - val_acc: 0.2800
+Epoch 00001: val_loss improved from inf to 0.01090, saving model to saved_models/model_and_weights.hdf5
+Epoch 2/30
+ - 801s - loss: 3.2789e-04 - acc: 0.4310 - val_loss: 0.0110 - val_acc: 0.2752
 
-Epoch 00002: val_loss did not improve from 0.01082
-Epoch 3/15
- - 792s - loss: 3.2941e-04 - acc: 0.4310 - val_loss: 0.0110 - val_acc: 0.2768
+Epoch 00002: val_loss did not improve from 0.01090
+Epoch 3/30
+ - 797s - loss: 3.2762e-04 - acc: 0.4306 - val_loss: 0.0110 - val_acc: 0.2742
 
-Epoch 00003: val_loss did not improve from 0.01082
+Epoch 00003: val_loss did not improve from 0.01090
 
 Epoch 00003: ReduceLROnPlateau reducing learning rate to 2.499999936844688e-06.
-Epoch 4/15
- - 791s - loss: 3.2793e-04 - acc: 0.4309 - val_loss: 0.0110 - val_acc: 0.2771
+Epoch 4/30
+ - 797s - loss: 3.2724e-04 - acc: 0.4305 - val_loss: 0.0111 - val_acc: 0.2749
 
-Epoch 00004: val_loss did not improve from 0.01082
-Epoch 5/15
- - 791s - loss: 3.2850e-04 - acc: 0.4308 - val_loss: 0.0110 - val_acc: 0.2767
+Epoch 00004: val_loss did not improve from 0.01090
+Epoch 5/30
+ - 799s - loss: 3.2708e-04 - acc: 0.4303 - val_loss: 0.0111 - val_acc: 0.2739
 
-Epoch 00005: val_loss did not improve from 0.01082
+Epoch 00005: val_loss did not improve from 0.01090
 
 Epoch 00005: ReduceLROnPlateau reducing learning rate to 6.24999984211172e-07.
-Epoch 6/15
- - 797s - loss: 3.2761e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2764
+Epoch 6/30
+ - 804s - loss: 3.2858e-04 - acc: 0.4303 - val_loss: 0.0111 - val_acc: 0.2738
 
-Epoch 00006: val_loss did not improve from 0.01082
-Epoch 7/15
- - 795s - loss: 3.3001e-04 - acc: 0.4308 - val_loss: 0.0110 - val_acc: 0.2763
+Epoch 00006: val_loss did not improve from 0.01090
+Epoch 7/30
+ - 799s - loss: 3.2804e-04 - acc: 0.4303 - val_loss: 0.0111 - val_acc: 0.2736
 
-Epoch 00007: val_loss did not improve from 0.01082
+Epoch 00007: val_loss did not improve from 0.01090
 
 Epoch 00007: ReduceLROnPlateau reducing learning rate to 1.56249996052793e-07.
-Epoch 8/15
- - 794s - loss: 3.2746e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2763
+Epoch 8/30
+ - 802s - loss: 3.2692e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2732
 
-Epoch 00008: val_loss did not improve from 0.01082
-Epoch 9/15
- - 791s - loss: 3.2785e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2763
+Epoch 00008: val_loss did not improve from 0.01090
+Epoch 9/30
+ - 802s - loss: 3.2830e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2736
 
-Epoch 00009: val_loss did not improve from 0.01082
+Epoch 00009: val_loss did not improve from 0.01090
 
 Epoch 00009: ReduceLROnPlateau reducing learning rate to 3.906249901319825e-08.
-Epoch 10/15
- - 793s - loss: 3.2737e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2762
+Epoch 10/30
+ - 802s - loss: 3.2726e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2734
 
-Epoch 00010: val_loss did not improve from 0.01082
-Epoch 11/15
- - 792s - loss: 3.2713e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2766
+Epoch 00010: val_loss did not improve from 0.01090
+Epoch 11/30
+ - 804s - loss: 3.2774e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2735
 
-Epoch 00011: val_loss did not improve from 0.01082
+Epoch 00011: val_loss did not improve from 0.01090
 
 Epoch 00011: ReduceLROnPlateau reducing learning rate to 9.765624753299562e-09.
-Epoch 12/15
- - 792s - loss: 3.2788e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2769
+Epoch 12/30
+ - 795s - loss: 3.2759e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2733
 
-Epoch 00012: val_loss did not improve from 0.01082
-Epoch 13/15
- - 791s - loss: 3.2818e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2767
+Epoch 00012: val_loss did not improve from 0.01090
+Epoch 13/30
+ - 802s - loss: 3.2774e-04 - acc: 0.4303 - val_loss: 0.0111 - val_acc: 0.2736
 
-Epoch 00013: val_loss did not improve from 0.01082
+Epoch 00013: val_loss did not improve from 0.01090
 
 Epoch 00013: ReduceLROnPlateau reducing learning rate to 2.4414061883248905e-09.
-Epoch 14/15
- - 791s - loss: 3.2874e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2768
+Epoch 14/30
+ - 801s - loss: 3.2843e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2734
 
-Epoch 00014: val_loss did not improve from 0.01082
-Epoch 15/15
- - 794s - loss: 3.2923e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2767
+Epoch 00014: val_loss did not improve from 0.01090
+Epoch 15/30
+ - 802s - loss: 3.2753e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2734
 
-Epoch 00015: val_loss did not improve from 0.01082
+Epoch 00015: val_loss did not improve from 0.01090
 
 Epoch 00015: ReduceLROnPlateau reducing learning rate to 6.103515470812226e-10.
+Epoch 16/30
+ - 800s - loss: 3.2758e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2735
+
+Epoch 00016: val_loss did not improve from 0.01090
+Epoch 17/30
+ - 797s - loss: 3.2739e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2735
+
+Epoch 00017: val_loss did not improve from 0.01090
+
+Epoch 00017: ReduceLROnPlateau reducing learning rate to 1.5258788677030566e-10.
+Epoch 18/30
+ - 804s - loss: 3.2804e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2733
+
+Epoch 00018: val_loss did not improve from 0.01090
+Epoch 19/30
+ - 798s - loss: 3.2864e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2738
+
+Epoch 00019: val_loss did not improve from 0.01090
+
+Epoch 00019: ReduceLROnPlateau reducing learning rate to 3.8146971692576415e-11.
+Epoch 20/30
+ - 803s - loss: 3.2926e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2727
+
+Epoch 00020: val_loss did not improve from 0.01090
+Epoch 21/30
+ - 798s - loss: 3.2713e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2735
+
+Epoch 00021: val_loss did not improve from 0.01090
+
+Epoch 00021: ReduceLROnPlateau reducing learning rate to 9.536742923144104e-12.
+Epoch 22/30
+ - 804s - loss: 3.2913e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2734
+
+Epoch 00022: val_loss did not improve from 0.01090
+Epoch 23/30
+ - 799s - loss: 3.2756e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2736
+
+Epoch 00023: val_loss did not improve from 0.01090
+
+Epoch 00023: ReduceLROnPlateau reducing learning rate to 2.384185730786026e-12.
+Epoch 24/30
+ - 799s - loss: 3.2844e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2731
+
+Epoch 00024: val_loss did not improve from 0.01090
+Epoch 25/30
+ - 804s - loss: 3.2839e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2726
+
+Epoch 00025: val_loss did not improve from 0.01090
+
+Epoch 00025: ReduceLROnPlateau reducing learning rate to 5.960464326965065e-13.
+Epoch 26/30
+ - 799s - loss: 3.2721e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2733
+
+Epoch 00026: val_loss did not improve from 0.01090
+Epoch 27/30
+ - 803s - loss: 3.2790e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2733
+
+Epoch 00027: val_loss did not improve from 0.01090
+
+Epoch 00027: ReduceLROnPlateau reducing learning rate to 1.4901160817412662e-13.
+Epoch 28/30
+ - 802s - loss: 3.2749e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2736
+
+Epoch 00028: val_loss did not improve from 0.01090
+Epoch 29/30
+ - 804s - loss: 3.2763e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2733
+
+Epoch 00029: val_loss did not improve from 0.01090
+
+Epoch 00029: ReduceLROnPlateau reducing learning rate to 3.7252902043531655e-14.
+Epoch 30/30
+ - 795s - loss: 3.2801e-04 - acc: 0.4302 - val_loss: 0.0111 - val_acc: 0.2732
+
+Epoch 00030: val_loss did not improve from 0.01090
 *********************************************************
 Running python analyze_model.py
-JOB 5141 is running on node01 
+JOB 5146 is running on node01 
 *********************************************************
 
 
@@ -123,12 +199,12 @@ WEIGHTS: [0.007 0.07  1.   ]
 
 
 Number of validation samples IoU evaulated on: 25
-IoU for Background is: 0.793
+IoU for Background is: 0.792
 IoU for Cosmic is: 0.129
 IoU for Beam is: 0.017
 Average IoU is: 0.313
 
-Test accuracy of the model is: 66.03%
+Test accuracy of the model is: 65.89%
 
 Done!
 
