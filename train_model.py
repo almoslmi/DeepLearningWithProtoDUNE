@@ -106,7 +106,7 @@ def main():
     input_tensor = Input((IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_DEPTH))
 
     model = get_unet_model(input_tensor=input_tensor, num_classes=len(CLASS_NAMES), num_filters=64,
-                           dropout=0.05,
+                           dropout=0.25,
                            batchnorm=True)
 
     model.compile(optimizer=Adam(lr=1e-5),
@@ -132,7 +132,7 @@ def main():
 
     # Plot the history
     loss_path = os.path.join("plots", "loss_vs_epoch.pdf")
-    plot_history(history, quantity='loss', plot_title='Weighted loss', y_label='Loss', plot_name=loss_path)
+    plot_history(history, quantity='loss', plot_title='Loss', y_label='Loss', plot_name=loss_path)
 
     accuracy_path = os.path.join("plots", "accuracy_vs_epoch.pdf")
     plot_history(history, quantity='acc', plot_title='Accuracy', y_label='Accuracy', plot_name=accuracy_path)
