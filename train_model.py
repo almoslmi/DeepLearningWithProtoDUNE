@@ -115,7 +115,7 @@ def main():
 
     model_and_weights = os.path.join("saved_models", "model_and_weights.hdf5")
     # If weights exist, load them before continuing training
-    continue_training = False
+    continue_training = True
     if(os.path.isfile(model_and_weights) and continue_training):
         print("Old weights found!")
         try:
@@ -132,7 +132,7 @@ def main():
 
     # Plot the history
     loss_path = os.path.join("plots", "loss_vs_epoch.pdf")
-    plot_history(history, quantity='loss', plot_title='Weighted loss', y_label='Loss', plot_name=loss_path)
+    plot_history(history, quantity='loss', plot_title='Loss', y_label='Loss', plot_name=loss_path)
 
     accuracy_path = os.path.join("plots", "accuracy_vs_epoch.pdf")
     plot_history(history, quantity='acc', plot_title='Accuracy', y_label='Accuracy', plot_name=accuracy_path)
