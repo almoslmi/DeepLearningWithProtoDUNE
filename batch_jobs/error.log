@@ -1,17 +1,17 @@
-2018-11-19 10:26:57.518366: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+2018-11-27 15:52:38.085154: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
 name: Tesla K20Xm major: 3 minor: 5 memoryClockRate(GHz): 0.732
 pciBusID: 0000:08:00.0
 totalMemory: 5.57GiB freeMemory: 5.49GiB
-2018-11-19 10:26:57.518435: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
-2018-11-19 10:27:00.535315: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
-2018-11-19 10:27:00.535373: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
-2018-11-19 10:27:00.535386: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
-2018-11-19 10:27:00.535649: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5278 MB memory) -> physical GPU (device: 0, name: Tesla K20Xm, pci bus id: 0000:08:00.0, compute capability: 3.5)
+2018-11-27 15:52:38.085219: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2018-11-27 15:52:38.488480: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-11-27 15:52:38.488543: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2018-11-27 15:52:38.488556: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2018-11-27 15:52:38.488840: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5278 MB memory) -> physical GPU (device: 0, name: Tesla K20Xm, pci bus id: 0000:08:00.0, compute capability: 3.5)
 Using TensorFlow backend.
-2018-11-20 11:05:06.804494: E tensorflow/stream_executor/cuda/cuda_driver.cc:397] failed call to cuInit: CUDA_ERROR_NO_DEVICE
-2018-11-20 11:05:06.804660: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:163] retrieving CUDA diagnostic information for host: node08
-2018-11-20 11:05:06.804683: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:170] hostname: node08
-2018-11-20 11:05:06.804827: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:194] libcuda reported version is: 384.81.0
-2018-11-20 11:05:06.805043: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:198] kernel reported version is: 384.81.0
-2018-11-20 11:05:06.805077: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:305] kernel version seems to match DSO: 384.81.0
+2018-11-27 19:12:23.682682: E tensorflow/stream_executor/cuda/cuda_driver.cc:397] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+2018-11-27 19:12:23.682840: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:163] retrieving CUDA diagnostic information for host: node03
+2018-11-27 19:12:23.682866: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:170] hostname: node03
+2018-11-27 19:12:23.683016: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:194] libcuda reported version is: 384.81.0
+2018-11-27 19:12:23.683119: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:198] kernel reported version is: 384.81.0
+2018-11-27 19:12:23.683153: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:305] kernel version seems to match DSO: 384.81.0
 Using TensorFlow backend.
