@@ -1,26 +1,17 @@
-2018-11-19 10:26:43.132203: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+2018-11-27 15:52:35.192624: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
 name: Tesla K20Xm major: 3 minor: 5 memoryClockRate(GHz): 0.732
 pciBusID: 0000:08:00.0
 totalMemory: 5.57GiB freeMemory: 5.49GiB
-2018-11-19 10:26:43.132263: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
-2018-11-19 10:26:43.525801: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
-2018-11-19 10:26:43.525865: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
-2018-11-19 10:26:43.525876: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
-2018-11-19 10:26:43.526163: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5278 MB memory) -> physical GPU (device: 0, name: Tesla K20Xm, pci bus id: 0000:08:00.0, compute capability: 3.5)
+2018-11-27 15:52:35.192688: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2018-11-27 15:52:35.591978: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-11-27 15:52:35.592041: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2018-11-27 15:52:35.592053: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2018-11-27 15:52:35.592342: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5278 MB memory) -> physical GPU (device: 0, name: Tesla K20Xm, pci bus id: 0000:08:00.0, compute capability: 3.5)
 Using TensorFlow backend.
-Exception ignored in: <bound method BaseSession.__del__ of <tensorflow.python.client.session.Session object at 0x7fd34f51e860>>
-Traceback (most recent call last):
-  File "/home/arbint/.conda/envs/envDeepLearningWithProtoDUNE/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 686, in __del__
-TypeError: 'NoneType' object is not callable
-2018-11-20 11:29:42.956877: E tensorflow/stream_executor/cuda/cuda_driver.cc:397] failed call to cuInit: CUDA_ERROR_NO_DEVICE
-2018-11-20 11:29:42.957084: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:163] retrieving CUDA diagnostic information for host: node06
-2018-11-20 11:29:42.957115: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:170] hostname: node06
-2018-11-20 11:29:42.957217: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:194] libcuda reported version is: 384.81.0
-2018-11-20 11:29:42.957338: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:198] kernel reported version is: 384.81.0
-2018-11-20 11:29:42.957354: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:305] kernel version seems to match DSO: 384.81.0
-2018-11-20 11:30:00.091825: W tensorflow/core/framework/allocator.cc:108] Allocation of 321126400 exceeds 10% of system memory.
-2018-11-20 11:30:00.156101: W tensorflow/core/framework/allocator.cc:108] Allocation of 321126400 exceeds 10% of system memory.
-2018-11-20 11:30:00.156104: W tensorflow/core/framework/allocator.cc:108] Allocation of 321126400 exceeds 10% of system memory.
-2018-11-20 11:30:00.445841: W tensorflow/core/framework/allocator.cc:108] Allocation of 321126400 exceeds 10% of system memory.
-2018-11-20 11:30:01.367004: W tensorflow/core/framework/allocator.cc:108] Allocation of 321126400 exceeds 10% of system memory.
+2018-11-27 19:12:13.968506: E tensorflow/stream_executor/cuda/cuda_driver.cc:397] failed call to cuInit: CUDA_ERROR_NO_DEVICE
+2018-11-27 19:12:13.968627: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:163] retrieving CUDA diagnostic information for host: node02
+2018-11-27 19:12:13.968643: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:170] hostname: node02
+2018-11-27 19:12:13.968756: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:194] libcuda reported version is: 384.81.0
+2018-11-27 19:12:13.968878: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:198] kernel reported version is: 384.81.0
+2018-11-27 19:12:13.968896: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:305] kernel version seems to match DSO: 384.81.0
 Using TensorFlow backend.
