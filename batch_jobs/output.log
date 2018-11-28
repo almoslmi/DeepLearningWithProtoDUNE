@@ -1,12 +1,12 @@
 
 *********************************************************
 This was run on:
-Mon Nov 19 10:26:31 EST 2018
+Tue Nov 27 15:52:25 EST 2018
 *********************************************************
 
 *********************************************************
 Running python train_model.py
-JOB 5038 is running on node05 
+JOB 5141 is running on node01 
 *********************************************************
 
 
@@ -14,9 +14,9 @@ Reading info from configuration:
 
 Runnning in training setting!
 
-NUM_TRAINING: 7815
-NUM_VALIDATION: 1019
-NUM_EPOCHS: 50
+NUM_TRAINING: 3626
+NUM_VALIDATION: 514
+NUM_EPOCHS: 15
 BATCH_SIZE: 2
 IMAGE_WIDTH: 224
 IMAGE_HEIGHT: 224
@@ -28,357 +28,83 @@ FEATURE_FILE_VALIDATION: /scratch/arbint/input_files/validation/feature_w.csv
 LABEL_FILE_VALIDATION: /scratch/arbint/input_files/validation/label_w.csv
 WEIGHTS: [0.007 0.07  1.   ]
 
-Epoch 1/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1820s - loss: 1.7764e-04 - acc: 0.4170 - val_loss: 0.0124 - val_acc: 0.4751
+Epoch 1/15
+ - 839s - loss: 3.2918e-04 - acc: 0.4314 - val_loss: 0.0108 - val_acc: 0.2865
 
-Epoch 00001: val_loss improved from inf to 0.01244, saving model to saved_models/model_and_weights.hdf5
-Epoch 2/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1805s - loss: 1.7736e-04 - acc: 0.4198 - val_loss: 0.0125 - val_acc: 0.4706
+Epoch 00001: val_loss improved from inf to 0.01082, saving model to saved_models/model_and_weights.hdf5
+Epoch 2/15
+ - 791s - loss: 3.2728e-04 - acc: 0.4312 - val_loss: 0.0109 - val_acc: 0.2800
 
-Epoch 00002: val_loss did not improve from 0.01244
-Epoch 3/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7747e-04 - acc: 0.4211 - val_loss: 0.0125 - val_acc: 0.4698
+Epoch 00002: val_loss did not improve from 0.01082
+Epoch 3/15
+ - 792s - loss: 3.2941e-04 - acc: 0.4310 - val_loss: 0.0110 - val_acc: 0.2768
 
-Epoch 00003: val_loss did not improve from 0.01244
+Epoch 00003: val_loss did not improve from 0.01082
 
 Epoch 00003: ReduceLROnPlateau reducing learning rate to 2.499999936844688e-06.
-Epoch 4/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1805s - loss: 1.7754e-04 - acc: 0.4213 - val_loss: 0.0125 - val_acc: 0.4701
+Epoch 4/15
+ - 791s - loss: 3.2793e-04 - acc: 0.4309 - val_loss: 0.0110 - val_acc: 0.2771
 
-Epoch 00004: val_loss did not improve from 0.01244
-Epoch 5/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7739e-04 - acc: 0.4214 - val_loss: 0.0125 - val_acc: 0.4697
+Epoch 00004: val_loss did not improve from 0.01082
+Epoch 5/15
+ - 791s - loss: 3.2850e-04 - acc: 0.4308 - val_loss: 0.0110 - val_acc: 0.2767
 
-Epoch 00005: val_loss did not improve from 0.01244
+Epoch 00005: val_loss did not improve from 0.01082
 
 Epoch 00005: ReduceLROnPlateau reducing learning rate to 6.24999984211172e-07.
-Epoch 6/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1801s - loss: 1.7728e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4694
+Epoch 6/15
+ - 797s - loss: 3.2761e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2764
 
-Epoch 00006: val_loss did not improve from 0.01244
-Epoch 7/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1804s - loss: 1.7710e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4698
+Epoch 00006: val_loss did not improve from 0.01082
+Epoch 7/15
+ - 795s - loss: 3.3001e-04 - acc: 0.4308 - val_loss: 0.0110 - val_acc: 0.2763
 
-Epoch 00007: val_loss did not improve from 0.01244
+Epoch 00007: val_loss did not improve from 0.01082
 
 Epoch 00007: ReduceLROnPlateau reducing learning rate to 1.56249996052793e-07.
-Epoch 8/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1804s - loss: 1.7723e-04 - acc: 0.4214 - val_loss: 0.0125 - val_acc: 0.4699
+Epoch 8/15
+ - 794s - loss: 3.2746e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2763
 
-Epoch 00008: val_loss did not improve from 0.01244
-Epoch 9/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1805s - loss: 1.7765e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
+Epoch 00008: val_loss did not improve from 0.01082
+Epoch 9/15
+ - 791s - loss: 3.2785e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2763
 
-Epoch 00009: val_loss did not improve from 0.01244
+Epoch 00009: val_loss did not improve from 0.01082
 
 Epoch 00009: ReduceLROnPlateau reducing learning rate to 3.906249901319825e-08.
-Epoch 10/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7760e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
+Epoch 10/15
+ - 793s - loss: 3.2737e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2762
 
-Epoch 00010: val_loss did not improve from 0.01244
-Epoch 11/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1804s - loss: 1.7717e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4693
+Epoch 00010: val_loss did not improve from 0.01082
+Epoch 11/15
+ - 792s - loss: 3.2713e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2766
 
-Epoch 00011: val_loss did not improve from 0.01244
+Epoch 00011: val_loss did not improve from 0.01082
 
 Epoch 00011: ReduceLROnPlateau reducing learning rate to 9.765624753299562e-09.
-Epoch 12/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7746e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4698
+Epoch 12/15
+ - 792s - loss: 3.2788e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2769
 
-Epoch 00012: val_loss did not improve from 0.01244
-Epoch 13/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1804s - loss: 1.7720e-04 - acc: 0.4215 - val_loss: 0.0124 - val_acc: 0.4694
+Epoch 00012: val_loss did not improve from 0.01082
+Epoch 13/15
+ - 791s - loss: 3.2818e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2767
 
-Epoch 00013: val_loss did not improve from 0.01244
+Epoch 00013: val_loss did not improve from 0.01082
 
 Epoch 00013: ReduceLROnPlateau reducing learning rate to 2.4414061883248905e-09.
-Epoch 14/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7735e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
+Epoch 14/15
+ - 791s - loss: 3.2874e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2768
 
-Epoch 00014: val_loss did not improve from 0.01244
-Epoch 15/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1801s - loss: 1.7781e-04 - acc: 0.4215 - val_loss: 0.0124 - val_acc: 0.4697
+Epoch 00014: val_loss did not improve from 0.01082
+Epoch 15/15
+ - 794s - loss: 3.2923e-04 - acc: 0.4307 - val_loss: 0.0110 - val_acc: 0.2767
 
-Epoch 00015: val_loss did not improve from 0.01244
+Epoch 00015: val_loss did not improve from 0.01082
 
 Epoch 00015: ReduceLROnPlateau reducing learning rate to 6.103515470812226e-10.
-Epoch 16/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1805s - loss: 1.7782e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4693
-
-Epoch 00016: val_loss did not improve from 0.01244
-Epoch 17/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7708e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4693
-
-Epoch 00017: val_loss did not improve from 0.01244
-
-Epoch 00017: ReduceLROnPlateau reducing learning rate to 1.5258788677030566e-10.
-Epoch 18/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7744e-04 - acc: 0.4214 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00018: val_loss did not improve from 0.01244
-Epoch 19/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7722e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4698
-
-Epoch 00019: val_loss did not improve from 0.01244
-
-Epoch 00019: ReduceLROnPlateau reducing learning rate to 3.8146971692576415e-11.
-Epoch 20/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7727e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4694
-
-Epoch 00020: val_loss did not improve from 0.01244
-Epoch 21/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7726e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
-
-Epoch 00021: val_loss did not improve from 0.01244
-
-Epoch 00021: ReduceLROnPlateau reducing learning rate to 9.536742923144104e-12.
-Epoch 22/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7765e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4700
-
-Epoch 00022: val_loss did not improve from 0.01244
-Epoch 23/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7708e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4695
-
-Epoch 00023: val_loss did not improve from 0.01244
-
-Epoch 00023: ReduceLROnPlateau reducing learning rate to 2.384185730786026e-12.
-Epoch 24/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7752e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4694
-
-Epoch 00024: val_loss did not improve from 0.01244
-Epoch 25/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7789e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
-
-Epoch 00025: val_loss did not improve from 0.01244
-
-Epoch 00025: ReduceLROnPlateau reducing learning rate to 5.960464326965065e-13.
-Epoch 26/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7759e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4698
-
-Epoch 00026: val_loss did not improve from 0.01244
-Epoch 27/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7769e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4701
-
-Epoch 00027: val_loss did not improve from 0.01244
-
-Epoch 00027: ReduceLROnPlateau reducing learning rate to 1.4901160817412662e-13.
-Epoch 28/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7734e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
-
-Epoch 00028: val_loss did not improve from 0.01244
-Epoch 29/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7727e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00029: val_loss did not improve from 0.01244
-
-Epoch 00029: ReduceLROnPlateau reducing learning rate to 3.7252902043531655e-14.
-Epoch 30/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7741e-04 - acc: 0.4215 - val_loss: 0.0124 - val_acc: 0.4697
-
-Epoch 00030: val_loss did not improve from 0.01244
-Epoch 31/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7728e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4696
-
-Epoch 00031: val_loss did not improve from 0.01244
-
-Epoch 00031: ReduceLROnPlateau reducing learning rate to 9.313225510882914e-15.
-Epoch 32/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1802s - loss: 1.7734e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
-
-Epoch 00032: val_loss did not improve from 0.01244
-Epoch 33/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1801s - loss: 1.7795e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4694
-
-Epoch 00033: val_loss did not improve from 0.01244
-
-Epoch 00033: ReduceLROnPlateau reducing learning rate to 2.3283063777207284e-15.
-Epoch 34/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1801s - loss: 1.7787e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4696
-
-Epoch 00034: val_loss did not improve from 0.01244
-Epoch 35/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7753e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4695
-
-Epoch 00035: val_loss did not improve from 0.01244
-
-Epoch 00035: ReduceLROnPlateau reducing learning rate to 5.820765944301821e-16.
-Epoch 36/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7730e-04 - acc: 0.4215 - val_loss: 0.0124 - val_acc: 0.4701
-
-Epoch 00036: val_loss did not improve from 0.01244
-Epoch 37/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1804s - loss: 1.7759e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00037: val_loss did not improve from 0.01244
-
-Epoch 00037: ReduceLROnPlateau reducing learning rate to 1.4551914860754553e-16.
-Epoch 38/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7741e-04 - acc: 0.4215 - val_loss: 0.0124 - val_acc: 0.4696
-
-Epoch 00038: val_loss did not improve from 0.01244
-Epoch 39/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7757e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4698
-
-Epoch 00039: val_loss did not improve from 0.01244
-
-Epoch 00039: ReduceLROnPlateau reducing learning rate to 3.637978715188638e-17.
-Epoch 40/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1802s - loss: 1.7721e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4702
-
-Epoch 00040: val_loss did not improve from 0.01244
-Epoch 41/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7719e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00041: val_loss did not improve from 0.01244
-
-Epoch 00041: ReduceLROnPlateau reducing learning rate to 9.094946787971595e-18.
-Epoch 42/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1804s - loss: 1.7777e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
-
-Epoch 00042: val_loss did not improve from 0.01244
-Epoch 43/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7748e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4695
-
-Epoch 00043: val_loss did not improve from 0.01244
-
-Epoch 00043: ReduceLROnPlateau reducing learning rate to 2.273736696992899e-18.
-Epoch 44/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1805s - loss: 1.7738e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4698
-
-Epoch 00044: val_loss did not improve from 0.01244
-Epoch 45/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7788e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4696
-
-Epoch 00045: val_loss did not improve from 0.01244
-
-Epoch 00045: ReduceLROnPlateau reducing learning rate to 5.684341742482247e-19.
-Epoch 46/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1803s - loss: 1.7728e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4695
-
-Epoch 00046: val_loss did not improve from 0.01244
-Epoch 47/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7759e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4697
-
-Epoch 00047: val_loss did not improve from 0.01244
-
-Epoch 00047: ReduceLROnPlateau reducing learning rate to 1.4210854356205618e-19.
-Epoch 48/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1800s - loss: 1.7798e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00048: val_loss did not improve from 0.01244
-Epoch 49/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1802s - loss: 1.7697e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00049: val_loss did not improve from 0.01244
-
-Epoch 00049: ReduceLROnPlateau reducing learning rate to 3.5527135890514045e-20.
-Epoch 50/50
-CSV iteration end for feature. Calling 'break'.
-CSV iteration end for feature. Calling 'break'.
- - 1799s - loss: 1.7755e-04 - acc: 0.4215 - val_loss: 0.0125 - val_acc: 0.4699
-
-Epoch 00050: val_loss did not improve from 0.01244
 *********************************************************
 Running python analyze_model.py
-JOB 5038 is running on node05 
+JOB 5141 is running on node01 
 *********************************************************
 
 
@@ -397,12 +123,12 @@ WEIGHTS: [0.007 0.07  1.   ]
 
 
 Number of validation samples IoU evaulated on: 25
-IoU for Background is: 0.301
-IoU for Cosmic is: 0.150
-IoU for Beam is: 0.012
-Average IoU is: 0.155
+IoU for Background is: 0.793
+IoU for Cosmic is: 0.129
+IoU for Beam is: 0.017
+Average IoU is: 0.313
 
-Test accuracy of the model is: 21.28%
+Test accuracy of the model is: 66.03%
 
 Done!
 
